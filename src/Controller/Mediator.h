@@ -6,7 +6,7 @@
 
 class Mediator{
     public:
-        uint16_t delay = 1;
+        uint16_t delay = 250;
         Led led = Led(&DDRD, 4);
         Mediator();
         void reactOnButtonLeftA(void);

@@ -1,10 +1,14 @@
 #include "headers.h"
 #include <avr/io.h>
 #include "Listener.h"
-#include "Signals.h"
 
-void Listener::update(uint8_t signal){
-    this->recvButtons.appendValue(signal);
+void Listener::update(){
+    uint8_t signal = this->fasadeButtons.getValue();
+    while(signal){
+        this->recvButtons.appendValue(signal);
+        signal = this->fasadeButtons.getValue();
+
+    }
 }
 
 void Listener::handleSignals(){
