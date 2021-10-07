@@ -6,23 +6,26 @@ Mediator::Mediator(){
 }
 
 void Mediator::reactOnButtonLeftA(){
-     this->delay = 100;
+     this->delay = 50;
 }
 
 void Mediator::reactOnButtonLeftB(){
-     this->delay = 500;
+     this->delay = 75;
 }
 
 void Mediator::reactOnButtonLeftC(){
-     this->delay = 1000;
+     this->delay = 100;
 }
 
 void Mediator::run(){
-     this->led.toggle();
-     uint16_t tmp = this->delay;
-     while(tmp) {
-          tmp--;
-          _delay_ms(1);
+     if ( !this->timer){
+          this->led.toggle();
+          this->timer = this->delay;
      }
 }
+
+void Mediator::updateTimers(){
+     if( this->timer) this->timer--;
+}
+
 

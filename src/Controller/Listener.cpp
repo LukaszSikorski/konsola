@@ -36,3 +36,12 @@ void Listener::handleSignals(){
     }
     this->mediator.run();
 }
+
+void Listener::updateTimers(){
+    this->timer--;
+    if ( !this->timer){
+        this->fasadeButtons.decButtons();
+        this->mediator.updateTimers();
+        this->timer = 10;
+    }
+}

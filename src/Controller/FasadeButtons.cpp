@@ -2,8 +2,14 @@
 
 uint8_t FasadeButtons::getValue() {
     uint8_t result = 0;
-    if (this->listButtons[0].isPush() == 1) result = Signals::buttonLeftA;
-    else if (this->listButtons[1].isPush() == 1) result = Signals::buttonLeftB;
-    else if (this->listButtons[2].isPush() == 1) result = Signals::buttonLeftC;
+    if (this->listButtons[0].isPush()) result = Signals::buttonLeftA;
+    else if (this->listButtons[1].isPush()) result = Signals::buttonLeftB;
+    else if (this->listButtons[2].isPush()) result = Signals::buttonLeftC;
     return result;
+}
+
+void FasadeButtons::decButtons(){
+    for (int i = 0;i < NUMBER_BUTTONS; i++){
+        this->listButtons[i].decTimer();
+    }
 }
