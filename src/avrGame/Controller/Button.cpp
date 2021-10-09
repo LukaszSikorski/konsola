@@ -1,7 +1,4 @@
-#include "headers.h"
-#include <avr/io.h>
 #include "Button.h"
-#include <util/delay.h>
 
 Button::Button(volatile uint8_t *port, uint8_t pin){
     *port &= ~(1<<pin);

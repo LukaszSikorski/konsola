@@ -1,5 +1,3 @@
-#include "headers.h"
-#include <avr/io.h>
 #include "Listener.h"
 
 void Listener::update(){
@@ -16,9 +14,11 @@ void Listener::handleSignals(){
     while(signal != 0){
         if( signal == Signals::buttonLeftA){
             this->mediator.reactOnButtonLeftA();
+            x++;
         }
         else if( signal == Signals::buttonLeftB){
             this->mediator.reactOnButtonLeftB();
+            y++;
         }
         else if( signal == Signals::buttonLeftC){
             this->mediator.reactOnButtonLeftC();

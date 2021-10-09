@@ -1,6 +1,4 @@
-#include "headers.h"
 #include "ListSignals.h"
-#include <avr/io.h>
 
 
 void ListSignals::appendValue(uint8_t value){

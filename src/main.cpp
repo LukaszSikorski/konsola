@@ -6,18 +6,21 @@
 #define LED_PIN 4
 
 
+
 Controller controller = Controller();
+Rect r = Rect(2,2,0,2);
 
 int main(void){
     TCCR0 |= (1<<CS01);
     TIMSK |= (1<<TOIE0);
     Matrix matrix = avrGame::matrix();
-
     sei();
     while(true){
         controller.run();
-        avrGame::draw.point(matrix, red,0,0);
+        avrGame::draw.rect(matrix,r, blue);
+        avrGame::draw.point(matrix, 5, 4, blue);
         avrGame::display.fill(matrix);
+        r.move(controller.listener.x,controller.listener.y);
 
     }
 }

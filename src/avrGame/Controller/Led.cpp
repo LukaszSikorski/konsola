@@ -1,12 +1,9 @@
-#include "headers.h"
-#include <avr/io.h>
 #include "Led.h"
 
 Led::Led(volatile uint8_t *port, uint8_t pin){
     (*port) |= (1 << pin);
     this->pin = pin;
     this->port = port;
-    // DDRD |= (1 << pin);
 }
 
 void Led::set(){
