@@ -11,10 +11,7 @@ void Display::fill(Matrix &matrix){
     this->colums++;
 }
 
-void Display::drawPoint(Matrix &matrix, Colors color, uint8_t x, uint8_t y){
-    x = 7 - x;
-    matrix.matrix[color][x] &= ~(1 << y);
-}
+
 
 uint8_t Display::getColumns(){
     uint8_t result = (1 << this->colums);

@@ -1,6 +1,9 @@
 #include <avr/io.h>
-#include "Colors.h"
 
+#ifndef _MATRIX_H
+#define _MATRIX_H
+
+#include "Colors.h"
 #define WIDTH 8
 
 class Matrix{
@@ -10,3 +13,5 @@ class Matrix{
         Matrix();
         uint8_t matrix[3][WIDTH];
 };
+
+#endif //
