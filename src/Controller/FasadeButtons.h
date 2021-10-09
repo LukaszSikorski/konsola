@@ -12,5 +12,5 @@ class FasadeButtons{
 
     public:
         uint8_t getValue();
-        void decButtons();
+        void updateTimers();
 };

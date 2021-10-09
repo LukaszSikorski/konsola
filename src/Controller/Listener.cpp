@@ -40,7 +40,7 @@ void Listener::handleSignals(){
 void Listener::updateTimers(){
     this->timer--;
     if ( !this->timer){
-        this->fasadeButtons.decButtons();
+        this->fasadeButtons.updateTimers();
         this->mediator.updateTimers();
         this->timer = 10;
     }

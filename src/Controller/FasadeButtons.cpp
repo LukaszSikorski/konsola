@@ -8,7 +8,7 @@ uint8_t FasadeButtons::getValue() {
     return result;
 }
 
-void FasadeButtons::decButtons(){
+void FasadeButtons::updateTimers(){
     for (int i = 0;i < NUMBER_BUTTONS; i++){
         this->listButtons[i].decTimer();
     }
