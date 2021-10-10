@@ -10,7 +10,7 @@ Matrix::Matrix(){
 void Matrix::clear(){
     for(uint8_t color=0; color < 3; ++color){
         for (uint8_t i = 0; i < WIDTH; ++i){
-            this->matrix[color][i] = 255;
+            this->matrix[color][i] = 0xffff;
         }
     } 
 }

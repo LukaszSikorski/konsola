@@ -1,5 +1,7 @@
 #include "Display.h"
 
+
+
 void Display::flip(Matrix &matrix){
     uint8_t col = this->getColumns();
     uint8_t green = this->getGreen(matrix);
@@ -14,43 +16,43 @@ void Display::flip(Matrix &matrix){
 
 
 
-uint8_t Display::getColumns(){
+uint16_t Display::getColumns(){
     uint8_t result = (1 << this->colums);
     return result;
 }
 
 uint8_t Display::getGreen(Matrix &matrix){
-    uint8_t result = 0;
-    uint8_t col = colums;
-    uint8_t tmp = matrix.matrix[green][col];
-    tmp = ((tmp << 4) & 0xf0) | ((tmp >> 4) & 0x0f);
-    for(uint8_t i = 0;i < WIDTH; i++){
-        if (tmp & (1 << (7 - i))){
-            result |= (1 << i);
+    uint16_t result = 0xffff;
+    uint8_t col = colums + 1;
+    uint16_t tmp = 0xffff;
+    for(uint8_t i = 1;i < WIDTH; i++){
+        if (!(matrix.matrix[green][col] & (1 << (WIDTH - i -1)))){
+            tmp &= ~(1 << (i - 1));
         }
-    }   
+    }  
+    result = ((tmp << 4) & 0xf0) | ((tmp >> 4) & 0x0f);
     return result;
 
 
 }
 
 uint8_t Display::getBlue(Matrix &matrix){
-    uint8_t result = 0;
-    uint8_t col = this->colums;
-    for(uint8_t i = 0;i < WIDTH; i++){
-        if (matrix.matrix[blue][col] & (1 << i)){
-            result |= (1 << i);
+    uint16_t result = 0xFFFF;
+    uint8_t col = this->colums + 1;
+    for(uint8_t i = 1;i < WIDTH; i++){
+        if (!(matrix.matrix[blue][col] & (1 << i))){
+            result &= ~(1 << (i - 1));
         }
     }   
     return result;
 }
 
 uint8_t Display::getRed(Matrix &matrix){
-    uint8_t result = 0;
-    uint8_t col = this->colums;
-    for(uint8_t i = 0;i < WIDTH; i++){
-        if (matrix.matrix[red][col] & (1 << i)){
-            result |= (1 << i);
+    uint16_t result = 0xFFFF;
+    uint8_t col = this->colums + 1;
+    for(uint8_t i = 1;i < WIDTH; i++){
+        if (!(matrix.matrix[red][col] & (1 << i))){
+            result &= ~(1 << (i - 1));
         }
     }   
     return result;

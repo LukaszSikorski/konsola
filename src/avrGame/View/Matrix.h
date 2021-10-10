@@ -4,7 +4,7 @@
 #define _MATRIX_H
 
 #include "Colors.h"
-#define WIDTH 8
+#define WIDTH 10
 
 class Matrix{
     private:
@@ -12,7 +12,7 @@ class Matrix{
     public:
         Matrix();
         void flip();
-        uint16_t matrix[3][WIDTH + 2];
+        uint16_t matrix[3][WIDTH];
 };
 
 #endif //
