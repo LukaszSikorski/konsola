@@ -1,6 +1,6 @@
 #include "Display.h"
 
-void Display::fill(Matrix &matrix){
+void Display::flip(Matrix &matrix){
     uint8_t col = this->getColumns();
     uint8_t green = this->getGreen(matrix);
     uint8_t bytes1 = (col & 0xf0) | (0x0f & green);
@@ -8,6 +8,7 @@ void Display::fill(Matrix &matrix){
     uint8_t bytes3 = getBlue(matrix);
     uint8_t bytes4 = getRed(matrix);
     this->spi.sendBytes(bytes1, bytes2, bytes3, bytes4);
+    matrix.flip();
     this->colums++;
 }
 

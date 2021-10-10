@@ -4,7 +4,7 @@
 
 class Display{
     public:
-        void fill(Matrix &matrix);
+        void flip(Matrix &matrix);
 
     private:
         uint8_t getColumns();

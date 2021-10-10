@@ -8,10 +8,11 @@
 
 class Matrix{
     private:
-        uint8_t _matrix[3][WIDTH];
+        void clear();
     public:
         Matrix();
-        uint8_t matrix[3][WIDTH];
+        void flip();
+        uint16_t matrix[3][WIDTH + 2];
 };
 
 #endif //
