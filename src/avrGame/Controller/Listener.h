@@ -1,23 +1,22 @@
 
 #ifndef _LISTENER_H
 #define _LISTENER_H
-
-#include "headers.h"
 #include <avr/io.h>
 #include "Mediator.h"
 #include "ListSignals.h"
 #include "FasadeButtons.h"
+#include <avr/io.h>
 
 class Listener{
     private:
-        Mediator mediator = Mediator();
-        ListSignals recvButtons = ListSignals();
-        FasadeButtons fasadeButtons = FasadeButtons();
-        volatile uint8_t timer = 0;
+        Mediator mediator;
+        ListSignals recvButtons;
+        FasadeButtons fasadeButtons;
+        volatile uint8_t timer;
 
     public:
-        uint8_t x = 0;
-        uint8_t y = 0;
+        uint8_t x;
+        uint8_t y;
         void update();
         void handleSignals(void);
         void updateTimers(void);

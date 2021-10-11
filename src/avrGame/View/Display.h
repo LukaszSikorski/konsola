@@ -1,6 +1,8 @@
 #include <avr/io.h>
 #include "Spi.h"
 #include "Matrix.h"
+#ifndef _DISPLAY_H
+#define _DISPLAY_H
 
 class Display{
     public:
@@ -17,3 +19,5 @@ class Display{
         uint8_t colForDisplay:4;
 
 };  
+
+#endif //

@@ -1,5 +1,6 @@
 #include <avr/io.h>
-
+#ifndef _LED_H
+#define _LED_H
 class Led {
     public:
         volatile uint8_t *port;
@@ -12,3 +13,4 @@ class Led {
         void clear(void);
         void toggle(void);
 };
+#endif //

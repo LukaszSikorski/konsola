@@ -1,5 +1,4 @@
 #include <avr/io.h>
-#include "avrGame/Controller/Controller.h"
 #include "avrGame/avrGame.h"
 #include <avr/interrupt.h>
 #define LED_PORT D
@@ -8,7 +7,7 @@
 volatile int8_t X = 0;
 volatile uint16_t TIMER = 0;
 
-Controller controller = Controller();
+Controller controller = avrGame::controller;
 Rect r = Rect(2, 2, 4, 1);
 Rect r2 = Rect(2,2,7,1);
 
@@ -21,9 +20,8 @@ int main(void){
         controller.run();
         avrGame::draw.rect(matrix,r, green);
         avrGame::draw.rect(matrix,r2, red);
-        r.move(X,1);
-        r2.move(1,X);
-        // avrGame::draw.point(matrix, 1, X, red);
+        r.move(X,2);
+        r2.move(2,X);
         avrGame::display.flip(matrix);
 
     }

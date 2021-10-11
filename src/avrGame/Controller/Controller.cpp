@@ -8,3 +8,5 @@ void Controller::run(){
 void Controller::updateTimers(void){
     this->listener.updateTimers();
 }
+
+Listener Controller::listener = Listener();

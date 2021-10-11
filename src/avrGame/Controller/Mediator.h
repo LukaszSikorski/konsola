@@ -1,13 +1,16 @@
+#ifndef _MEDIATOR_H
+#define _MEDIATOR_H
 #include <avr/io.h>
 #include "Led.h"
-#include <util/delay.h>
-
+#include <avr/io.h>
+#include "../Model/Model.h"
 
 class Mediator{
     public:
-        uint16_t delay = 250;
-        volatile uint16_t timer = 0;
-        Led led = Led(&DDRD, 4);
+        uint16_t delay;
+        volatile uint16_t timer;
+        static Led led;
+        Model model;
         Mediator();
         void reactOnButtonLeftA(void);
         void reactOnButtonLeftB(void);
@@ -15,3 +18,5 @@ class Mediator{
         void updateTimers(void);
         void run();
 };
+
+#endif // _MEDIATOR_H

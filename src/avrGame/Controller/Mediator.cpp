@@ -4,6 +4,9 @@
 
 
 Mediator::Mediator(){
+     delay = 250;
+     timer = 0;
+     model = Model();
 }
 
 void Mediator::reactOnButtonLeftA(){
@@ -29,4 +32,4 @@ void Mediator::updateTimers(){
      if( this->timer) this->timer--;
 }
 
-
+Led Mediator::led = Led(&DDRD, 4);
