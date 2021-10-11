@@ -5,10 +5,9 @@
 class Controller{
 
     public:
-        static Listener listener;
+        Listener listener;
         void run();
         void updateTimers();
-
 };
 
 #endif //

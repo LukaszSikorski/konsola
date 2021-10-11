@@ -1,12 +1,9 @@
-#include <avr/io.h>
 #include "Mediator.h"
-
 
 
 Mediator::Mediator(){
      delay = 250;
      timer = 0;
-     model = Model();
 }
 
 void Mediator::reactOnButtonLeftA(){

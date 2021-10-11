@@ -5,7 +5,6 @@
 #include "View/Display.h"
 #include "View/Draw.h"
 #include "Controller/Controller.h"
-#include "Model/Model.h"
 
 class avrGame{
     private:
