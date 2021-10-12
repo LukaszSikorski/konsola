@@ -1,5 +1,9 @@
 #include "ListSignals.h"
 
+ListSignals::ListSignals() {
+    this->head = 0;
+    this->tail = 0;
+}
 
 void ListSignals::appendValue(uint8_t value){
     this->table[this->head] = value;

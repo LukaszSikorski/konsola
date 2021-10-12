@@ -5,9 +5,10 @@
 class Controller{
 
     public:
-        Listener listener;
-        void run();
+        Controller(Listener *);
+        void capture();
         void updateTimers();
+        Listener *listener;
 };
 
 #endif //

@@ -6,6 +6,7 @@ Button::Button(volatile uint8_t *port, uint8_t pin){
     this->port = port;
     this->pin = pin;
     this->timer = 0;
+    this->checked = 0;
 }
 
 uint8_t Button::isPush(){

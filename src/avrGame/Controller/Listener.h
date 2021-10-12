@@ -9,11 +9,11 @@
 class Listener{
     private:
     public:
-        Mediator mediator;
+        Listener(Mediator *);
+        Mediator *med;
         ListSignals recvButtons;
         FasadeButtons fasadeButtons;
         volatile uint8_t timer;
-
         uint8_t x;
         uint8_t y;
         void update();

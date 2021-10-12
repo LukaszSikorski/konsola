@@ -20,7 +20,7 @@
 class Button{
     private:
         volatile uint8_t *port;
-        uint8_t checked = 0;
+        uint8_t checked;
         uint8_t pin;
     public:
         volatile uint8_t timer;

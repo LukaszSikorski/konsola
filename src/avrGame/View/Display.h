@@ -14,7 +14,7 @@ class Display{
         uint8_t getGreen(Matrix &matrix);
         uint8_t getBlue(Matrix &matrix);
 
-        Spi spi = Spi();
+        Spi spi;
         uint8_t colums:4;
         uint8_t colForDisplay:4;
 

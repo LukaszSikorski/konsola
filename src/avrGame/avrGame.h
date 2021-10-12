@@ -5,11 +5,17 @@
 #include "View/Display.h"
 #include "View/Draw.h"
 #include "Controller/Controller.h"
+#include "Model/Model.h"
+
+class Model;
 
 class avrGame{
     private:
-        static Matrix _matrix;
     public:
+        static Matrix _matrix;
+        static Model mode;
+        static Mediator mediato;
+        static Listener listene;
         static Controller controller;
         static Draw draw;
         static Display display;
