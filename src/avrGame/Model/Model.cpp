@@ -1,18 +1,14 @@
 #include "Model.h"
+#include "../avrGame.h"
 
 
 Model::Model(Matrix *matrix){
     this->matrix = matrix;
-    x = 0;
-    y = 0;
-    rects[0] = avrGame::rect(2, 2, 2, 2);
-    rects[1] = avrGame::rect(2, 2, 3, 3);
+    this->state = &snakeState;
 }
 
 void Model::reactOnButtonLeftA(){
-    y--;
-    if ( y < -1) y = 9;
-    rects[0].move(x,y);
+    this->state->reactOnButtonLeftA();
 }
 
 void Model::reactOnButtonLeftB(){
@@ -46,7 +42,7 @@ void Model::reactOnButtonRightC(){
 }
 
 void Model::capture(){
-    avrGame::draw.rect(*(this->matrix), rects[0], red);
+    this->state->capture();
 }
 
 void update(){

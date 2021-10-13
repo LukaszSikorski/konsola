@@ -3,12 +3,16 @@
 
 #include <avr/io.h>
 #include "../View/Figures.h"
-#include "../avrGame.h"
 #include "../View/Colors.h"
+#include "State.h"
 
+
+class Matrix;
 
 class Model{
     public:
+        State *state;
+        SnakeState snakeState = SnakeState(this);
         Matrix *matrix;
         uint8_t x,y;
         Model();

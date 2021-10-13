@@ -27,8 +27,7 @@ ISR(TIMER0_OVF_vect){
     TCNT0 = 159;
     TIMER--;
     if(!TIMER){
-        PORTD ^= (1<<PD4);
-        TIMER = 10;
+        TIMER = 30;
 
     }
 }
