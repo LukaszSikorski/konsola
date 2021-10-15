@@ -6,7 +6,8 @@
 
 class Display{
     public:
-        void flip(Matrix &matrix);
+        void fill(Matrix *matrix);
+        void flip(Matrix *matrix);
         Display() {this->colums = 0;}
     private:
         uint16_t getColumns();

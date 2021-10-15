@@ -2,7 +2,6 @@
 
 Direction::Direction Logic::direction = Direction::stop;
 uint16_t Logic::timerMove = 500;
-uint16_t Logic::timerDraw = 500;
 
 void Logic::drawChunk(Chunk &chunk,Colors color, Matrix &matrix){
     uint8_t x = chunk.getX();
@@ -28,6 +27,7 @@ void Logic::moveChunk( Chunk *chunk){
 }
 
 void Logic::moveSnake(Snake *snake){
+    Chunk ch(1,1);
     if (Logic::direction != Direction::stop){
         Chunk last = snake->chunks[ snake->lenght - 1];
         for(uint8_t i = snake->lenght - 1; i > 0; i--){
@@ -35,9 +35,8 @@ void Logic::moveSnake(Snake *snake){
             snake->chunks[i].moveTo(next);
         }
         Logic::moveChunk(&snake->chunks[0]);
-        if (snake->chunks[0] == Chunk(1,1)){
-            snake->chunks[snake->lenght] = last;
-            snake->lenght++;
+        if (Logic::isOnScore(snake, &ch)){
+            Logic::addChunkToSnake(snake, &last);
         }
     }
 
@@ -67,6 +66,17 @@ void Logic::drawSnake(Snake &snake, Matrix &matrix){
     }
     chunk = &snake.chunks[0];
     Logic::drawChunk(*chunk, Colors::white,matrix);
+}
 
+bool Logic::isOnScore(Snake *snake, Chunk *chunk){
+    bool result = false;
+    if( snake->chunks[0] == *chunk ){
+        result = true;
+    }
+    return result;
+}
 
+void Logic::addChunkToSnake(Snake *snake, Chunk *chunk){
+    snake->chunks[snake->lenght] = *chunk;
+    snake->lenght++;
 }

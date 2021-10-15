@@ -11,8 +11,10 @@ class Matrix{
         void clear();
     public:
         Matrix();
+        void fill();
         void flip();
         uint16_t matrix[3][WIDTH];
+        uint16_t _matrix[3][WIDTH];
 };
 
 #endif //

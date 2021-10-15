@@ -16,7 +16,9 @@ int main(void){
     sei();
     while(true){
         controller->capture();
-        avrGame::display.flip(*matrix);
+        avrGame::display.fill(matrix);
+
+            
 
     }
 }
@@ -26,8 +28,4 @@ ISR(TIMER0_OVF_vect){
     controller->updateTimers();
     TCNT0 = 159;
     TIMER--;
-    if(!TIMER){
-        TIMER = 30;
-
-    }
 }
