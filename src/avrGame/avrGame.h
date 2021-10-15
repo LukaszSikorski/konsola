@@ -22,7 +22,8 @@ class avrGame{
         static Draw draw;
         static Display display;
         static Matrix matrix(void);
-        static Rect rect(uint8_t, uint8_t, uint8_t, uint8_t);
+        static Rect rect(uint8_t x, uint8_t y, uint8_t width, uint8_t height);
+        static void ToggleLed();
 };
 
 #endif

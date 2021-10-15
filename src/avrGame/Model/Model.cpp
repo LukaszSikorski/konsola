@@ -12,39 +12,30 @@ void Model::reactOnButtonLeftA(){
 }
 
 void Model::reactOnButtonLeftB(){
-    x--;
-    if (x < -1) x = 9;
-    rects[0].move(x,y);
+    this->state->reactOnButtonLeftB();
 }
 
 void Model::reactOnButtonLeftC(){
-    y++;
-    if (y > 9) y = -1;
-    rects[0].move(x,y);
+
 }
 
 void Model::reactOnButtonRightA(){
-    y--;
-    if ( y < -1) y = 9;
-    rects[0].move(x,y);
+    this->state->reactOnButtonRightA();
 }
 
 void Model::reactOnButtonRightB(){
-    x++;
-    if (x > 9) x = -1;
-    rects[0].move(x,y);
+    this->state->reactOnButtonRightB();
 }
 
 void Model::reactOnButtonRightC(){
-    y++;
-    if (y > 9) y = -1;
-    rects[0].move(x,y);
+
 }
 
 void Model::capture(){
     this->state->capture();
 }
 
-void update(){
+void Model::update(){
+    this->state->update();
     
 }

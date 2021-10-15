@@ -5,9 +5,9 @@
 
 class Rect{
     public:
-        Rect(uint8_t width, uint8_t height, uint8_t x, uint8_t y);
+        Rect(uint8_t x, uint8_t y, uint8_t width, uint8_t height);
         Rect();
-        void move(uint8_t x, uint8_t y);
+        void moveTo(uint8_t x, uint8_t y);
         uint8_t width:4;
         uint8_t height:4;
         uint8_t x:4;

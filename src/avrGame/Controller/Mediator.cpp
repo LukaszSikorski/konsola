@@ -47,6 +47,10 @@ void Mediator::reactOnButtonRightC(){
 
 void Mediator::updateTimers(){
      if( this->timer) this->timer--;
+     if (!this->timer) {
+          this->timer = 30;
+     }
+     this->mod->update();
 }
 
 Led Mediator::led = Led(&DDRD, 4);
