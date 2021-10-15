@@ -18,6 +18,7 @@ class Logic{
         static void moveUp();
         static void moveDown();
         static uint16_t timerMove;
+        static uint16_t timerDraw;
 
 
 };

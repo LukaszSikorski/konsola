@@ -23,8 +23,9 @@ class Chunk{
         Chunk(uint8_t x, uint8_t y);
         void setX(uint8_t x);
         void setY(uint8_t y);
-        uint8_t getX(void);
-        uint8_t getY(void);
+        uint8_t getX(void) const;
+        uint8_t getY(void) const;
+        bool operator==(const Chunk &chunk);
     private:
         uint8_t x:4;
         uint8_t y:4;

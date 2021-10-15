@@ -6,7 +6,10 @@ enum Colors{
     red,
     green,
     blue,
-    empty
+    empty,
+    yellow,
+    purple,
+    white
 };
 
 #endif // _COLORS

@@ -3,7 +3,22 @@
 
 void Draw::point(Matrix &matrix, uint8_t x, uint8_t y, Colors color){
     x = ((WIDTH - 1) - x) ;
-    matrix.matrix[color][x] &= ~(1 << (y ));
+    if(color == Colors::yellow){
+        matrix.matrix[red][x] &= ~(1 << (y ));
+        matrix.matrix[green][x] &= ~(1 << (y ));
+    }
+    else if( color == Colors::purple){
+        matrix.matrix[red][x] &= ~(1 << (y ));
+        matrix.matrix[blue][x] &= ~(1 << (y ));
+    }
+    else if( color == Colors::white){
+        matrix.matrix[red][x] &= ~(1 << (y ));
+        matrix.matrix[blue][x] &= ~(1 << (y ));
+        matrix.matrix[green][x] &= ~(1 << (y ));
+    }
+    else{
+        matrix.matrix[color][x] &= ~(1 << (y ));
+    }
 }
 
 void Draw::rect(Matrix &matrix, Rect & rect,Colors color){

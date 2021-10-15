@@ -37,12 +37,20 @@ void Chunk::setY(uint8_t y){
     this->y = y;
 }
 
-uint8_t Chunk::getX(){
+uint8_t Chunk::getX()const{
     return this->x;
 }
 
-uint8_t Chunk::getY(){
+uint8_t Chunk::getY()const{
     return this->y;
+}
+
+bool Chunk::operator==(const Chunk &chunk){
+    bool result = false;
+    if (this->x == chunk.getX() && this->y == chunk.getY()){
+        result = true;
+    }
+    return result;
 }
 
 Snake::Snake(){

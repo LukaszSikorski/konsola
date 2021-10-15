@@ -58,9 +58,13 @@ void SnakeState::capture(){
         Logic::moveSnake(&this->snake);
         Logic::timerMove = 100;
     }
-    Logic::drawSnake(this->snake, avrGame::_matrix);
+    if (!Logic::timerDraw){
+        Logic::drawSnake(this->snake, avrGame::_matrix);
+        Logic::timerDraw = 10;
+    }
 }
 
 void SnakeState::update(){
     if (Logic::timerMove)Logic::timerMove--;
+    if (Logic::timerDraw)Logic::timerDraw--;
 }

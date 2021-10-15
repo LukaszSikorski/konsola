@@ -1,7 +1,8 @@
 #include "Logic.h"
 
 Direction::Direction Logic::direction = Direction::stop;
-uint16_t Logic::timerMove=500;
+uint16_t Logic::timerMove = 500;
+uint16_t Logic::timerDraw = 500;
 
 void Logic::drawChunk(Chunk &chunk,Colors color, Matrix &matrix){
     uint8_t x = chunk.getX();
@@ -27,11 +28,18 @@ void Logic::moveChunk( Chunk *chunk){
 }
 
 void Logic::moveSnake(Snake *snake){
-    for(uint8_t i = snake->lenght - 1; i > 0; i--){
-        Chunk *next = &snake->chunks[i - 1];
-        snake->chunks[i].moveTo(next);
+    if (Logic::direction != Direction::stop){
+        Chunk last = snake->chunks[ snake->lenght - 1];
+        for(uint8_t i = snake->lenght - 1; i > 0; i--){
+            Chunk *next = &snake->chunks[i - 1];
+            snake->chunks[i].moveTo(next);
+        }
+        Logic::moveChunk(&snake->chunks[0]);
+        if (snake->chunks[0] == Chunk(1,1)){
+            snake->chunks[snake->lenght] = last;
+            snake->lenght++;
+        }
     }
-    Logic::moveChunk(&snake->chunks[0]);
 
 }
 
@@ -58,7 +66,7 @@ void Logic::drawSnake(Snake &snake, Matrix &matrix){
         Logic::drawChunk(*chunk, Colors::red,matrix);
     }
     chunk = &snake.chunks[0];
-    Logic::drawChunk(*chunk, Colors::green,matrix);
-    Logic::drawChunk(*chunk, Colors::red,matrix);
+    Logic::drawChunk(*chunk, Colors::white,matrix);
+
 
 }
