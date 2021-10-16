@@ -26,22 +26,22 @@ void Mediator::reactOnButtonLeftB(){
      this->delay = 75;
 }
 
-void Mediator::reactOnButtonLeftC(){
-     this->mod->reactOnButtonRightC();
+void Mediator::reactOnButtonDown(){
+     this->mod->reactOnButtonDown();
      this->delay = 100;
 }
 
-void Mediator::reactOnButtonRightA(){
+void Mediator::reactOnButtonTop(){
      this->delay = 100;
-     this->mod->reactOnButtonRightA();
+     this->mod->reactOnButtonTop();
 }
 
-void Mediator::reactOnButtonRightB(){
-     this->mod->reactOnButtonRightB();
+void Mediator::reactOnButtonLeft(){
+     this->mod->reactOnButtonLeft();
 }
 
-void Mediator::reactOnButtonRightC(){
-     this->mod->reactOnButtonRightC();
+void Mediator::reactOnButtonRight(){
+     this->mod->reactOnButtonRight();
 }
 
 

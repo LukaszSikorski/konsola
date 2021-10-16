@@ -23,17 +23,17 @@ void Listener::handleSignals(){
         else if( signal == Signals::buttonLeftB){
             this->med->reactOnButtonLeftB();
         }
-        else if( signal == Signals::buttonLeftC){
-            this->med->reactOnButtonLeftC();
+        else if( signal == Signals::reactOnButtonDown){
+            this->med->reactOnButtonDown();
         }
-        else if( signal == Signals::buttonRightA){
-            this->med->reactOnButtonRightA(); 
+        else if( signal == Signals::buttonTop){
+            this->med->reactOnButtonTop(); 
         }
-        else if( signal == Signals::buttonRightB){
-            this->med->reactOnButtonRightB(); 
+        else if( signal == Signals::buttonLeft){
+            this->med->reactOnButtonLeft(); 
         }
-        else if( signal == Signals::buttonRightC){
-            this->med->reactOnButtonRightC(); 
+        else if( signal == Signals::reactOnButtonRight){
+            this->med->reactOnButtonRight(); 
 
         }
         signal = this->recvButtons.getValue();

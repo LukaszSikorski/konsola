@@ -27,28 +27,39 @@ void State::reactOnButtonLeftA(void){
 void State::reactOnButtonLeftB(void){
 }
 
-void State::reactOnButtonRightA(void){
+void State::reactOnButtonTop(void){
 }
 
-void State::reactOnButtonRightB(void){
+void State::reactOnButtonDown(void){
+}
+
+void State::reactOnButtonRight(void){
+}
+
+void State::reactOnButtonLeft(void){
 }
 
 void SnakeState::reactOnButtonLeftA(void){
-    Logic::moveUp();
     avrGame::ToggleLed();   
 }
 
 void SnakeState::reactOnButtonLeftB(void){
+}
+
+void SnakeState::reactOnButtonTop(void){
+    Logic::moveUp();
+    avrGame::ToggleLed();   
+}
+
+void SnakeState::reactOnButtonDown(void){
     Logic::moveDown();
 }
 
-void SnakeState::reactOnButtonRightA(void){
+void SnakeState::reactOnButtonRight(void){
     Logic::moveRight();
-    avrGame::ToggleLed();
-    
 }
 
-void SnakeState::reactOnButtonRightB(void){
+void SnakeState::reactOnButtonLeft(void){
     Logic::moveLeft();
 }
 

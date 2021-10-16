@@ -20,10 +20,10 @@ class Model{
         Rect rects[2];
         void reactOnButtonLeftA(void);
         void reactOnButtonLeftB(void);
-        void reactOnButtonLeftC(void);
-        void reactOnButtonRightA(void);
-        void reactOnButtonRightB(void);
-        void reactOnButtonRightC(void);
+        void reactOnButtonDown(void);
+        void reactOnButtonTop(void);
+        void reactOnButtonLeft(void);
+        void reactOnButtonRight(void);
         void capture(void);
         void update(void);
 };

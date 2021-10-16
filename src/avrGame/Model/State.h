@@ -13,8 +13,10 @@ class State{
         Model *model;
         virtual void reactOnButtonLeftA(void);
         virtual void reactOnButtonLeftB(void);
-        virtual void reactOnButtonRightA(void);
-        virtual void reactOnButtonRightB(void);
+        virtual void reactOnButtonTop(void);
+        virtual void reactOnButtonDown(void);
+        virtual void reactOnButtonRight(void);
+        virtual void reactOnButtonLeft(void);
         virtual void capture();
         virtual void update();
 
@@ -26,8 +28,10 @@ class SnakeState:public State{
         SnakeState(Model *);
         void reactOnButtonLeftA(void);
         void reactOnButtonLeftB(void);
-        void reactOnButtonRightA(void);
-        void reactOnButtonRightB(void);
+        void reactOnButtonTop(void);
+        void reactOnButtonDown(void);
+        void reactOnButtonRight(void);
+        void reactOnButtonLeft(void);
         void capture(void);
         void update();
         Snake snake;

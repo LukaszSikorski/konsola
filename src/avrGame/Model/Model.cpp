@@ -15,20 +15,21 @@ void Model::reactOnButtonLeftB(){
     this->state->reactOnButtonLeftB();
 }
 
-void Model::reactOnButtonLeftC(){
+void Model::reactOnButtonDown(){
+    this->state->reactOnButtonDown();
 
 }
 
-void Model::reactOnButtonRightA(){
-    this->state->reactOnButtonRightA();
+void Model::reactOnButtonTop(){
+    this->state->reactOnButtonTop();
 }
 
-void Model::reactOnButtonRightB(){
-    this->state->reactOnButtonRightB();
+void Model::reactOnButtonLeft(){
+    this->state->reactOnButtonLeft();
 }
 
-void Model::reactOnButtonRightC(){
-
+void Model::reactOnButtonRight(){
+    this->state->reactOnButtonRight();
 }
 
 void Model::capture(){

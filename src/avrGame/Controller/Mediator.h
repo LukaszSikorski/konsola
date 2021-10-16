@@ -14,10 +14,10 @@ class Mediator{
         Mediator(Model *mod);
         void reactOnButtonLeftA(void);
         void reactOnButtonLeftB(void);
-        void reactOnButtonLeftC(void);
-        void reactOnButtonRightA(void);
-        void reactOnButtonRightB(void);
-        void reactOnButtonRightC(void);
+        void reactOnButtonDown(void);
+        void reactOnButtonTop(void);
+        void reactOnButtonLeft(void);
+        void reactOnButtonRight(void);
         void updateTimers(void);
         void capture();
 };

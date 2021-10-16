@@ -5,10 +5,10 @@ namespace Signals{
         error,
         buttonLeftA,
         buttonLeftB,
-        buttonLeftC,
-        buttonRightA,
-        buttonRightB,
-        buttonRightC
+        reactOnButtonDown,
+        buttonTop,
+        buttonLeft,
+        reactOnButtonRight
     };
 }
 // czemu to nie działa???
@@ -16,9 +16,9 @@ namespace Signals{
 //     error,
 //     buttonLeftA,
 //     buttonLeftB,
-//     buttonLeftC,
-//     buttonRightA,
-//     buttonRightB,
-//     buttonRightC
+//     reactOnButtonDown,
+//     buttonTop,
+//     buttonLeft,
+//     reactOnButtonRight
 // };
 #endif

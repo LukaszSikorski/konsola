@@ -9,10 +9,10 @@ class FasadeButtons{
             Button listButtons[NUMBER_BUTTONS] = {// do poprawki dużo warning,, dodaj deklaracja w konstruktorze
             Button(&DDRD,6),
             Button(&DDRD,7),
-            Button(&DDRB,0),
+            Button(&DDRC,0),
             Button(&DDRC,2),
             Button(&DDRC,1),
-            Button(&DDRC,0),
+            Button(&DDRB,0),
         };
 
     public:

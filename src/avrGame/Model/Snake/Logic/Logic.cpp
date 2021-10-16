@@ -43,19 +43,19 @@ void Logic::moveSnake(Snake *snake){
 }
 
 void Logic::moveLeft(){
-    Logic::direction = Direction::left;
+    if (Logic::direction != Direction::right) Logic::direction = Direction::left;
 }
 
 void Logic::moveRight(){
-    Logic::direction = Direction::right;
+    if (Logic::direction != Direction::left) Logic::direction = Direction::right;
 }
 
 void Logic::moveUp(){
-    Logic::direction = Direction::up;
+    if (Logic::direction != Direction::down) Logic::direction = Direction::up;
 }
 
 void Logic::moveDown(){
-    Logic::direction = Direction::down;
+    if (Logic::direction != Direction::up) Logic::direction = Direction::down;
 }
 
 void Logic::drawSnake(Snake &snake, Matrix &matrix){
