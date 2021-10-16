@@ -102,7 +102,7 @@ Chunk Logic::getRandomChunk(){
 
 bool Logic::isFreePos( Snake *snake, Chunk *chunk){
     bool result = true;
-    for (uint8_t i = 0; i < snake->lenght - 1; i++){
+    for (uint8_t i = 0; i < snake->lenght; i++){
         if (snake->chunks[i] == *chunk){
             result = false;
             break;
@@ -119,4 +119,16 @@ void Logic::addNewScore(Snake *snake){
         condition = Logic::isFreePos(snake, &chunk);
     }
     Logic::score = chunk;
+}
+
+bool Logic::isCollsion(Snake *snake){
+    bool result = false;
+    Chunk *head = &snake->chunks[0];
+    for (uint8_t i = 1;i < snake->lenght; i++){
+        if ( *head == snake->chunks[i] ){
+            result = true;
+            break;
+        }
+    }
+    return result;
 }

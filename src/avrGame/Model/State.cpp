@@ -67,6 +67,11 @@ void SnakeState::reactOnButtonLeft(void){
 void SnakeState::capture(){
     if(!Logic::timerMove){
         Logic::moveSnake(&this->snake);
+        if( Logic::isCollsion(&this->snake)){
+            this->snake.clear();
+            Logic::direction = Direction::stop;
+            return;
+        }
         Logic::timerMove = 100;
         Logic::drawSnake(this->snake, avrGame::_matrix);
         Logic::drawScore(Colors::blue, avrGame::_matrix);

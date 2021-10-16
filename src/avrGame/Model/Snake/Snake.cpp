@@ -11,7 +11,12 @@ Chunk::Chunk(){
     this->y = 0;
 }
 
-void Chunk::moveTo(uint8_t x, uint8_t y) {
+void Chunk::clear(){
+    this->x = 0;
+    this->y = 0;
+}
+
+void Chunk::moveTo(const uint8_t x,const uint8_t y) {
     setX(x);
     setY(y);
 }
@@ -45,7 +50,7 @@ uint8_t Chunk::getY()const{
     return this->y;
 }
 
-bool Chunk::operator==(const Chunk &chunk){
+bool Chunk::operator==(const Chunk &chunk)const{
     bool result = false;
     if (this->x == chunk.getX() && this->y == chunk.getY()){
         result = true;
@@ -53,13 +58,13 @@ bool Chunk::operator==(const Chunk &chunk){
     return result;
 }
 
-bool Chunk::operator!=(const Chunk &chunk){
+bool Chunk::operator!=(const Chunk &chunk)const{
     bool result = true;
     result = ! this->operator==(chunk);
     return result;
 }
 
-void Chunk::show(){
+void Chunk::show()const {
     avrGame::rs232.sendStr("x = ");
     avrGame::rs232.sendInt(x);
     avrGame::rs232.sendStr(" ,y = ");
@@ -68,10 +73,20 @@ void Chunk::show(){
 
 }
 
-Snake::Snake(){
+Snake::Snake(const uint8_t live){
     this->lenght = 3;
-    this->chunks[0].moveTo(1,3);
-    this->chunks[1].moveTo(1,4);
-    this->chunks[2].moveTo(1,5);
+    this->live = live;
+    this->chunks[0].moveTo(3,3);
+    this->chunks[1].moveTo(3,4);
+    this->chunks[2].moveTo(3,5);
 }
 
+void Snake::clear(){
+    for( uint8_t i = 0;i < lenght;i++){
+        chunks[i].clear();
+    }
+    this->lenght = 3;
+    this->chunks[0].moveTo(3,3);
+    this->chunks[1].moveTo(3,4);
+    this->chunks[2].moveTo(3,5);
+}
