@@ -6,7 +6,8 @@
 #include "View/Draw.h"
 #include "Controller/Controller.h"
 #include "Model/Model.h"
-
+#include "Controller/Rs232.h"
+#include "Controller/ADC.h"
 
 
 class Model;
@@ -14,6 +15,8 @@ class Model;
 class avrGame{
     private:
     public:
+        static Adc adc;
+        static Rs232 rs232;
         static Matrix _matrix;
         static Model mode;
         static Mediator mediato;

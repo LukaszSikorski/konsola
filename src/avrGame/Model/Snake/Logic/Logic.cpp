@@ -2,6 +2,7 @@
 
 Direction::Direction Logic::direction = Direction::stop;
 uint16_t Logic::timerMove = 500;
+Chunk Logic::score = Chunk(2,2);
 
 void Logic::drawChunk(Chunk &chunk,Colors color, Matrix &matrix){
     uint8_t x = chunk.getX();
@@ -9,6 +10,10 @@ void Logic::drawChunk(Chunk &chunk,Colors color, Matrix &matrix){
     Rect rect = avrGame::rect(x, y, 1, 1);
     avrGame::draw.rect(matrix, rect, color);
 
+}
+
+void Logic::drawScore(Colors color, Matrix &matrix){
+    Logic::drawChunk(Logic::score, color, matrix);
 }
 
 void Logic::moveChunk( Chunk *chunk){
@@ -27,7 +32,6 @@ void Logic::moveChunk( Chunk *chunk){
 }
 
 void Logic::moveSnake(Snake *snake){
-    Chunk ch(1,1);
     if (Logic::direction != Direction::stop){
         Chunk last = snake->chunks[ snake->lenght - 1];
         for(uint8_t i = snake->lenght - 1; i > 0; i--){
@@ -35,8 +39,9 @@ void Logic::moveSnake(Snake *snake){
             snake->chunks[i].moveTo(next);
         }
         Logic::moveChunk(&snake->chunks[0]);
-        if (Logic::isOnScore(snake, &ch)){
+        if (Logic::isOnScore(snake, &Logic::score)){
             Logic::addChunkToSnake(snake, &last);
+            Logic::addNewScore(snake);
         }
     }
 
@@ -65,7 +70,7 @@ void Logic::drawSnake(Snake &snake, Matrix &matrix){
         Logic::drawChunk(*chunk, Colors::red,matrix);
     }
     chunk = &snake.chunks[0];
-    Logic::drawChunk(*chunk, Colors::white,matrix);
+    Logic::drawChunk(*chunk, Colors::green,matrix);
 }
 
 bool Logic::isOnScore(Snake *snake, Chunk *chunk){
@@ -79,4 +84,39 @@ bool Logic::isOnScore(Snake *snake, Chunk *chunk){
 void Logic::addChunkToSnake(Snake *snake, Chunk *chunk){
     snake->chunks[snake->lenght] = *chunk;
     snake->lenght++;
+}
+
+uint8_t Logic::getRandomPos(uint8_t from , uint8_t to){
+    uint16_t result = 0;
+    uint8_t mux = to - from;
+    result = (avrGame::adc.getSingle(5) % mux) + from;
+    return (uint8_t)(result);
+}
+
+Chunk Logic::getRandomChunk(){
+    uint8_t x = Logic::getRandomPos(1, 9);
+    uint8_t y = Logic::getRandomPos(1, 9);
+    Chunk chunk = Chunk(x, y);
+    return chunk;
+}
+
+bool Logic::isFreePos( Snake *snake, Chunk *chunk){
+    bool result = true;
+    for (uint8_t i = 0; i < snake->lenght - 1; i++){
+        if (snake->chunks[i] == *chunk){
+            result = false;
+            break;
+        }
+    }
+    return result;
+}
+
+void Logic::addNewScore(Snake *snake){
+    bool condition = false;
+    Chunk chunk;
+    while (!condition){
+        chunk = Logic::getRandomChunk();
+        condition = Logic::isFreePos(snake, &chunk);
+    }
+    Logic::score = chunk;
 }

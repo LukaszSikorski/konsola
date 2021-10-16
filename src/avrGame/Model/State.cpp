@@ -69,6 +69,7 @@ void SnakeState::capture(){
         Logic::moveSnake(&this->snake);
         Logic::timerMove = 100;
         Logic::drawSnake(this->snake, avrGame::_matrix);
+        Logic::drawScore(Colors::blue, avrGame::_matrix);
         avrGame::display.flip(&avrGame::_matrix);
     }
 }

@@ -5,6 +5,8 @@ Matrix avrGame::matrix(){
     return avrGame::_matrix;
 }
 
+Adc avrGame::adc = Adc();
+Rs232 avrGame::rs232 = Rs232(__UBRR);
 Listener avrGame::listene = Listener(&mediato);
 Draw avrGame::draw = Draw();
 Display avrGame::display = Display();

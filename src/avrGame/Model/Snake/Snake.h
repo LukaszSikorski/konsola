@@ -26,6 +26,8 @@ class Chunk{
         uint8_t getX(void) const;
         uint8_t getY(void) const;
         bool operator==(const Chunk &chunk);
+        bool operator!=(const Chunk &chunk);
+        void show();
     private:
         uint8_t x:4;
         uint8_t y:4;

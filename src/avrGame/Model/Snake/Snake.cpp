@@ -1,5 +1,5 @@
 #include "Snake.h"
-
+#include "../../avrGame.h"
 
 Chunk::Chunk(uint8_t x, uint8_t y){
     this->x = x;
@@ -53,10 +53,25 @@ bool Chunk::operator==(const Chunk &chunk){
     return result;
 }
 
+bool Chunk::operator!=(const Chunk &chunk){
+    bool result = true;
+    result = ! this->operator==(chunk);
+    return result;
+}
+
+void Chunk::show(){
+    avrGame::rs232.sendStr("x = ");
+    avrGame::rs232.sendInt(x);
+    avrGame::rs232.sendStr(" ,y = ");
+    avrGame::rs232.sendInt(y);
+    avrGame::rs232.sendStr("\n\r");
+
+}
+
 Snake::Snake(){
     this->lenght = 3;
-    this->chunks[0].moveTo(3,3);
-    this->chunks[1].moveTo(3,4);
-    this->chunks[2].moveTo(3,5);
+    this->chunks[0].moveTo(1,3);
+    this->chunks[1].moveTo(1,4);
+    this->chunks[2].moveTo(1,5);
 }
 
