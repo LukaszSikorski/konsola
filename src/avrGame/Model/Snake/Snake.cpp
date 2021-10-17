@@ -31,14 +31,14 @@ void Chunk::move(uint8_t x, uint8_t y) {
 }
 
 void Chunk::setX(uint8_t x){
-    if (x > 250) x = 8;
-    else if(x > 8 ) x = 0;
+    if (x == 0) x = 8;
+    else if(x > 8 ) x = 1;
     this->x = x;
 }
 
 void Chunk::setY(uint8_t y){
-    if (y > 250) y = 8;
-    else if(y > 8 ) y = 0;
+    if (y == 0) y = 8;
+    else if(y > 8 ) y = 1;
     this->y = y;
 }
 

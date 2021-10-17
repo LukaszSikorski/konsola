@@ -14,6 +14,7 @@ class Model{
         State *state;
         SnakeState snakeState = SnakeState(this);
         MenuState menuState = MenuState(this);
+        AnimationState animationState = AnimationState(this);
         Matrix *matrix;
         uint8_t x,y;
         Model();

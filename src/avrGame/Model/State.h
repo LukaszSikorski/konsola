@@ -6,6 +6,7 @@
 #include "../View/Figures.h"
 #define HUMNAN_SIZE_SPEED 6
 #define SIZE_SPEED HUMNAN_SIZE_SPEED 
+#define TIMER_ANIMATION 50
 
 class Model;
 
@@ -45,6 +46,8 @@ class SnakeState:public State{
         void init();
         Snake snake;
 
+    private:
+
 };
 
 class MenuState:public State{
@@ -64,6 +67,27 @@ class MenuState:public State{
         void drawLevelSpeed();
         Games games;
         uint8_t levelSpeed;
+
+};
+
+class AnimationState:public State{
+    public:
+        AnimationState(Model *);
+        // void reactOnButtonLeftA(void);
+        // void reactOnButtonLeftB(void);
+        // void reactOnButtonTop(void);
+        // void reactOnButtonDown(void);
+        // void reactOnButtonRight(void);
+        // void reactOnButtonLeft(void);
+        void capture(void);
+        // void update();
+        void init();
+        State *targetState;
+    private:
+        void drawAnimation();
+        uint8_t timerAnimation;
+        uint8_t loading;
+
 
 };
 

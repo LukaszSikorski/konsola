@@ -38,12 +38,14 @@ void State::reactOnButtonLeft(void){
 }
 
 SnakeState::SnakeState(Model *model):State(model){
+    init();
 }
 
 void SnakeState::reactOnButtonLeftA(void){
     avrGame::ToggleLed();  
     if(snake.direction == Direction::stop){
-        this->model->state = &this->model->menuState;
+        this->model->state = &this->model->animationState;
+        this->model->animationState.targetState = &this->model->menuState;
     }
 }
 
@@ -70,9 +72,11 @@ void SnakeState::reactOnButtonLeft(void){
 
 
 void SnakeState::capture(){
+
     if(!Logic::timerMove){
         Logic::moveSnake(&this->snake);
         if( Logic::isCollsion(&this->snake)){
+            Logic::addNewScore(&snake);
             this->snake.clear();
             Logic::timerMove = 500;
             return;
@@ -90,7 +94,9 @@ void SnakeState::update(){
 
 void SnakeState::init(){
     this->snake.clear();
-    Logic::timerMove = 500;
+    avrGame::_matrix.fill();
+    avrGame::display.flip(&avrGame::_matrix);
+    Logic::timerMove = 1;
 }
 MenuState::MenuState(Model *model):State(model){
     games = Games::snake;
@@ -113,8 +119,8 @@ void MenuState::reactOnButtonLeftB(void){
 
 void MenuState::reactOnButtonTop(void){
     Logic::timeMove = (SIZE_SPEED * 20) - (levelSpeed * 20) + 10;
-    this->model->state = &this->model->snakeState;
-    this->model->state->init();
+    this->model->state = &this->model->animationState;
+    this->model->animationState.targetState = &this->model->snakeState;
 }
 
 void MenuState::reactOnButtonDown(void){
@@ -144,4 +150,41 @@ void MenuState::drawLevelSpeed(){
     for(uint8_t i = 1; i < (levelSpeed + 1); i++){
         avrGame::draw.point(avrGame::_matrix, i, 1, Colors::purple);
     }
+}
+
+
+AnimationState::AnimationState(Model *model):State(model){
+    init();
+}
+
+
+void AnimationState::init(){
+    timerAnimation = 150;
+    loading = 0;
+}
+
+void AnimationState::drawAnimation(){
+        if(loading < 10){
+        timerAnimation--;
+        if(! timerAnimation){
+
+            for(uint8_t i = 1; i <= loading; i++){
+                for (uint8_t j = 1; j <= 8; j++){
+                    avrGame::draw.point(avrGame::_matrix, i, j, Colors::green);
+
+                }
+            }
+            avrGame::display.flip(&avrGame::_matrix);
+            loading++;
+            timerAnimation = TIMER_ANIMATION;
+        }
+        return;
+    }
+    this->init();
+    this->targetState->init();
+    this->model->state = this->targetState;
+}
+
+void AnimationState::capture(){
+    this->drawAnimation();
 }
