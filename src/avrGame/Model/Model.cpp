@@ -4,7 +4,8 @@
 
 Model::Model(Matrix *matrix){
     this->matrix = matrix;
-    this->state = &menuState;
+    this->animationState.targetState = &menuState;
+    this->state = &animationState;
 }
 
 void Model::reactOnButtonLeftA(){

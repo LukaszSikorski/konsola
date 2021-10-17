@@ -45,7 +45,7 @@ void SnakeState::reactOnButtonLeftA(void){
     avrGame::ToggleLed();  
     if(snake.direction == Direction::stop){
         this->model->state = &this->model->animationState;
-        this->model->animationState.targetState = &this->model->menuState;
+        this->model->animationState.targetState = &this->model->menuStateSnake;
     }
 }
 
@@ -99,46 +99,45 @@ void SnakeState::init(){
     Logic::timerMove = 1;
 }
 MenuState::MenuState(Model *model):State(model){
+    index = 0;
     games = Games::snake;
-    levelSpeed = 1;
+    this->states[0] = &model->menuStateSnake,
+    this->states[1] = &model->menuStateTest,
+    this->current = states[index];
 }
 
 void MenuState::reactOnButtonLeftA(void){
-    levelSpeed++;
-    if(levelSpeed > SIZE_SPEED){
-        levelSpeed = SIZE_SPEED;
-    }
+    this->model->state = &this->model->animationState;
+    this->model->animationState.targetState = this->current;
+
 }
 
 void MenuState::reactOnButtonLeftB(void){
-    levelSpeed--;
-    if(levelSpeed > SIZE_SPEED || levelSpeed == 0){
-        levelSpeed = 1;
-    }
+
 }
 
 void MenuState::reactOnButtonTop(void){
-    Logic::timeMove = (SIZE_SPEED * 20) - (levelSpeed * 20) + 10;
-    this->model->state = &this->model->animationState;
-    this->model->animationState.targetState = &this->model->snakeState;
+
 }
 
 void MenuState::reactOnButtonDown(void){
 }
 
 void MenuState::reactOnButtonRight(void){
+    index++;
+    if(index >= SIZE_STATES) index = 0;
 }
 
 void MenuState::reactOnButtonLeft(void){
+    index--;
+    if (index < 0) index = SIZE_STATES - 1;
+    
 }
 
 void MenuState::capture(){
-    avrGame::draw.point(avrGame::_matrix, 4, 4, SNAKE_HEAD);
-    avrGame::draw.point(avrGame::_matrix, 4, 5, SNAKE_TAIL);
-    avrGame::draw.point(avrGame::_matrix, 4, 6, SNAKE_TAIL);
-    avrGame::draw.point(avrGame::_matrix, 6, 3, SNAKE_SCORE);
-    drawLevelSpeed();
-    avrGame::_matrix.flip();
+    this->current = states[index];
+    this->current->capture();
+
 }
 void MenuState::update(){
 }
@@ -146,11 +145,7 @@ void MenuState::update(){
 void MenuState::init(){
 }
 
-void MenuState::drawLevelSpeed(){
-    for(uint8_t i = 1; i < (levelSpeed + 1); i++){
-        avrGame::draw.point(avrGame::_matrix, i, 1, Colors::purple);
-    }
-}
+
 
 
 AnimationState::AnimationState(Model *model):State(model){
@@ -187,4 +182,92 @@ void AnimationState::drawAnimation(){
 
 void AnimationState::capture(){
     this->drawAnimation();
+}
+
+MenuStateSnake::MenuStateSnake(Model *model):State(model){
+
+}
+
+void MenuStateSnake::capture(){
+    avrGame::draw.point(avrGame::_matrix, 4, 4, SNAKE_HEAD);
+    avrGame::draw.point(avrGame::_matrix, 4, 5, SNAKE_TAIL);
+    avrGame::draw.point(avrGame::_matrix, 4, 6, SNAKE_TAIL);
+    avrGame::draw.point(avrGame::_matrix, 6, 3, SNAKE_SCORE);
+    drawLevelSpeed();
+    avrGame::_matrix.flip();
+}
+
+void MenuStateSnake::reactOnButtonLeftA(void){
+    Logic::timeMove = (SIZE_SPEED * 20) - (levelSpeed * 20) + 10;
+    this->model->state = &this->model->animationState;
+    this->model->animationState.targetState = &this->model->snakeState;
+}
+
+void MenuStateSnake::reactOnButtonLeftB(void){
+    Logic::timeMove = (SIZE_SPEED * 20) - (levelSpeed * 20) + 10;
+    this->model->state = &this->model->animationState;
+    this->model->animationState.targetState = &this->model->menuState;
+}
+
+void MenuStateSnake::reactOnButtonTop(void){
+
+}
+
+void MenuStateSnake::reactOnButtonLeft(){
+    levelSpeed--;
+    if(levelSpeed > SIZE_SPEED || levelSpeed == 0){
+        levelSpeed = 1;
+    }
+}
+
+void MenuStateSnake::reactOnButtonRight(){
+    levelSpeed++;
+    if(levelSpeed > SIZE_SPEED){
+        levelSpeed = SIZE_SPEED;
+    }
+}
+
+void MenuStateSnake::drawLevelSpeed(){
+    for(uint8_t i = 1; i < (levelSpeed + 1); i++){
+        avrGame::draw.point(avrGame::_matrix, i, 1, Colors::purple);
+    }
+}
+
+MenuStateTest::MenuStateTest(Model *model):State(model){
+
+}
+
+void MenuStateTest::capture(){
+    avrGame::draw.point(avrGame::_matrix, 1, 1, SNAKE_HEAD);
+    avrGame::draw.point(avrGame::_matrix, 2, 2, SNAKE_TAIL);
+    avrGame::draw.point(avrGame::_matrix, 3, 3, SNAKE_TAIL);
+    avrGame::draw.point(avrGame::_matrix, 4, 4, SNAKE_SCORE);
+    drawLevelSpeed();
+    avrGame::_matrix.flip();
+}
+
+void MenuStateTest::reactOnButtonLeftA(void){
+    levelSpeed++;
+    if(levelSpeed > SIZE_SPEED){
+        levelSpeed = SIZE_SPEED;
+    }
+}
+
+void MenuStateTest::reactOnButtonLeftB(void){
+    levelSpeed--;
+    if(levelSpeed > SIZE_SPEED || levelSpeed == 0){
+        levelSpeed = 1;
+    }
+}
+
+void MenuStateTest::reactOnButtonTop(void){
+    Logic::timeMove = (SIZE_SPEED * 20) - (levelSpeed * 20) + 10;
+    this->model->state = &this->model->animationState;
+    this->model->animationState.targetState = &this->model->snakeState;
+}
+
+void MenuStateTest::drawLevelSpeed(){
+    for(uint8_t i = 1; i < (levelSpeed + 1); i++){
+        avrGame::draw.point(avrGame::_matrix, i, 1, Colors::purple);
+    }
 }
