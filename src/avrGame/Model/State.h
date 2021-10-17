@@ -6,7 +6,7 @@
 #include "../View/Figures.h"
 #define HUMNAN_SIZE_SPEED 6
 #define SIZE_SPEED HUMNAN_SIZE_SPEED 
-#define TIMER_ANIMATION 50
+#define TIMER_ANIMATION 60
 #define SIZE_STATES 2
 class Model;
 
@@ -82,6 +82,7 @@ class AnimationState:public State{
         void capture(void);
         // void update();
         void init();
+        inline State *setTarget(State *target);
         State *targetState;
     private:
         void drawAnimation();

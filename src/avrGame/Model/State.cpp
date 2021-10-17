@@ -44,8 +44,8 @@ SnakeState::SnakeState(Model *model):State(model){
 void SnakeState::reactOnButtonLeftA(void){
     avrGame::ToggleLed();  
     if(snake.direction == Direction::stop){
-        this->model->state = &this->model->animationState;
-        this->model->animationState.targetState = &this->model->menuStateSnake;
+        this->model->state = this->model->animationState.setTarget(&this->model->menuStateSnake);
+        init();
     }
 }
 
@@ -107,8 +107,7 @@ MenuState::MenuState(Model *model):State(model){
 }
 
 void MenuState::reactOnButtonLeftA(void){
-    this->model->state = &this->model->animationState;
-    this->model->animationState.targetState = this->current;
+    this->model->state = this->model->animationState.setTarget(this->current);
 
 }
 
@@ -184,6 +183,12 @@ void AnimationState::capture(){
     this->drawAnimation();
 }
 
+State *AnimationState::setTarget(State *target){
+    this->model->state = &this->model->animationState;
+    this->model->animationState.targetState = target;
+    return this;
+}
+
 MenuStateSnake::MenuStateSnake(Model *model):State(model){
 
 }
@@ -199,14 +204,12 @@ void MenuStateSnake::capture(){
 
 void MenuStateSnake::reactOnButtonLeftA(void){
     Logic::timeMove = (SIZE_SPEED * 20) - (levelSpeed * 20) + 10;
-    this->model->state = &this->model->animationState;
-    this->model->animationState.targetState = &this->model->snakeState;
+    this->model->state = this->model->animationState.setTarget(&this->model->snakeState);
 }
 
 void MenuStateSnake::reactOnButtonLeftB(void){
     Logic::timeMove = (SIZE_SPEED * 20) - (levelSpeed * 20) + 10;
-    this->model->state = &this->model->animationState;
-    this->model->animationState.targetState = &this->model->menuState;
+    this->model->state = this->model->animationState.setTarget(&this->model->menuState);
 }
 
 void MenuStateSnake::reactOnButtonTop(void){
@@ -262,8 +265,7 @@ void MenuStateTest::reactOnButtonLeftB(void){
 
 void MenuStateTest::reactOnButtonTop(void){
     Logic::timeMove = (SIZE_SPEED * 20) - (levelSpeed * 20) + 10;
-    this->model->state = &this->model->animationState;
-    this->model->animationState.targetState = &this->model->snakeState;
+    this->model->state = this->model->animationState.setTarget(&this->model->snakeState);
 }
 
 void MenuStateTest::drawLevelSpeed(){
