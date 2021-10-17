@@ -5,18 +5,25 @@
 #include "../Snake.h"
 #include "../../../avrGame.h"
 
+const Colors SNAKE_HEAD = Colors::green;
+const Colors SNAKE_TAIL = Colors::red;
+const Colors SNAKE_SCORE = Colors::blue;
+
+
+
+
 
 class Logic{
     public:
         static void drawChunk(Chunk &,Colors color ,Matrix &matrix);
         static void drawScore(Colors color ,Matrix &matrix);
         static void drawSnake(Snake &, Matrix &matrix);
-        static void moveChunk( Chunk *chunk);
+        static void moveChunk( Chunk *chunk, Direction::Direction const *);
         static void moveSnake( Snake *snake);
-        static void moveLeft();
-        static void moveRight();
-        static void moveUp();
-        static void moveDown();
+        static void moveLeft(Snake *snake);
+        static void moveRight(Snake *snake);
+        static void moveUp(Snake *snake);
+        static void moveDown(Snake *snake);
         static Chunk getRandomChunk();
         static void addNewScore(Snake *snake);
         static void addChunkToSnake(Snake *snake, Chunk *chunk);
@@ -24,8 +31,8 @@ class Logic{
         static bool isOnScore(Snake *snake, Chunk *chunk);
         static bool isCollsion(Snake *snake);
         static uint8_t getRandomPos(uint8_t from, uint8_t to);
-        static Direction::Direction direction;
         static uint16_t timerMove;
+        static uint16_t timeMove;
         static Chunk score;
 
 

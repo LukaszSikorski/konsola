@@ -4,7 +4,7 @@
 
 Model::Model(Matrix *matrix){
     this->matrix = matrix;
-    this->state = &snakeState;
+    this->state = &menuState;
 }
 
 void Model::reactOnButtonLeftA(){

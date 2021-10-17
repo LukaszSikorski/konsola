@@ -13,6 +13,7 @@ class Model{
     public:
         State *state;
         SnakeState snakeState = SnakeState(this);
+        MenuState menuState = MenuState(this);
         Matrix *matrix;
         uint8_t x,y;
         Model();

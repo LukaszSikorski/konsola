@@ -4,8 +4,15 @@
 #include "Snake/Snake.h"
 #include <avr/io.h>
 #include "../View/Figures.h"
+#define HUMNAN_SIZE_SPEED 6
+#define SIZE_SPEED HUMNAN_SIZE_SPEED 
 
 class Model;
+
+enum Games{
+    snake,
+    test
+};
 
 class State{
     public:
@@ -19,6 +26,7 @@ class State{
         virtual void reactOnButtonLeft(void);
         virtual void capture();
         virtual void update();
+        virtual void init();
 
 };
 
@@ -34,7 +42,28 @@ class SnakeState:public State{
         void reactOnButtonLeft(void);
         void capture(void);
         void update();
+        void init();
         Snake snake;
+
+};
+
+class MenuState:public State{
+    public:
+        MenuState(Model *);
+        void reactOnButtonLeftA(void);
+        void reactOnButtonLeftB(void);
+        void reactOnButtonTop(void);
+        void reactOnButtonDown(void);
+        void reactOnButtonRight(void);
+        void reactOnButtonLeft(void);
+        void capture(void);
+        void update();
+        void init();
+    private:
+
+        void drawLevelSpeed();
+        Games games;
+        uint8_t levelSpeed;
 
 };
 

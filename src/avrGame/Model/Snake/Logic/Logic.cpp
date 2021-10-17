@@ -1,7 +1,7 @@
 #include "Logic.h"
 
-Direction::Direction Logic::direction = Direction::stop;
-uint16_t Logic::timerMove = 500;
+uint16_t Logic::timerMove = 200;
+uint16_t Logic::timeMove = 200;
 Chunk Logic::score = Chunk(2,2);
 
 void Logic::drawChunk(Chunk &chunk,Colors color, Matrix &matrix){
@@ -16,29 +16,29 @@ void Logic::drawScore(Colors color, Matrix &matrix){
     Logic::drawChunk(Logic::score, color, matrix);
 }
 
-void Logic::moveChunk( Chunk *chunk){
-    if(Logic::direction == Direction::left){
+void Logic::moveChunk( Chunk *chunk, Direction::Direction const *direction){
+    if(*direction == Direction::left){
         chunk->move(-1, 0);
     }
-    else if (Logic::direction == Direction::right){
+    else if (*direction == Direction::right){
         chunk->move(1, 0);
     }
-    else if (Logic::direction == Direction::up){
+    else if (*direction == Direction::up){
         chunk->move(0, -1);
     }
-    else if (Logic::direction == Direction::down){
+    else if (*direction == Direction::down){
         chunk->move(0, 1);
     }
 }
 
 void Logic::moveSnake(Snake *snake){
-    if (Logic::direction != Direction::stop){
+    if (snake->direction != Direction::stop){
         Chunk last = snake->chunks[ snake->lenght - 1];
         for(uint8_t i = snake->lenght - 1; i > 0; i--){
             Chunk *next = &snake->chunks[i - 1];
             snake->chunks[i].moveTo(next);
         }
-        Logic::moveChunk(&snake->chunks[0]);
+        Logic::moveChunk(&snake->chunks[0], &snake->direction);
         if (Logic::isOnScore(snake, &Logic::score)){
             Logic::addChunkToSnake(snake, &last);
             Logic::addNewScore(snake);
@@ -47,30 +47,30 @@ void Logic::moveSnake(Snake *snake){
 
 }
 
-void Logic::moveLeft(){
-    if (Logic::direction != Direction::right) Logic::direction = Direction::left;
+void Logic::moveLeft(Snake *snake){
+    if (snake->direction != Direction::right) snake->direction = Direction::left;
 }
 
-void Logic::moveRight(){
-    if (Logic::direction != Direction::left) Logic::direction = Direction::right;
+void Logic::moveRight(Snake *snake){
+    if (snake->direction != Direction::left) snake->direction = Direction::right;
 }
 
-void Logic::moveUp(){
-    if (Logic::direction != Direction::down) Logic::direction = Direction::up;
+void Logic::moveUp(Snake *snake){
+    if (snake->direction != Direction::down) snake->direction = Direction::up;
 }
 
-void Logic::moveDown(){
-    if (Logic::direction != Direction::up) Logic::direction = Direction::down;
+void Logic::moveDown(Snake *snake){
+    if (snake->direction != Direction::up) snake->direction = Direction::down;
 }
 
 void Logic::drawSnake(Snake &snake, Matrix &matrix){
     Chunk *chunk;
     for(uint8_t i = 1; i < snake.lenght; i++){
         Chunk *chunk = &snake.chunks[i];
-        Logic::drawChunk(*chunk, Colors::red,matrix);
+        Logic::drawChunk(*chunk, SNAKE_TAIL, matrix);
     }
     chunk = &snake.chunks[0];
-    Logic::drawChunk(*chunk, Colors::green,matrix);
+    Logic::drawChunk(*chunk, SNAKE_HEAD,matrix);
 }
 
 bool Logic::isOnScore(Snake *snake, Chunk *chunk){

@@ -24,11 +24,11 @@ class Chunk{
         void moveTo(Chunk *chunk);
         void setX(uint8_t x);
         void setY(uint8_t y);
+        void show()const;
         uint8_t getX(void) const;
         uint8_t getY(void) const;
         bool operator==(const Chunk &chunk)const;
         bool operator!=(const Chunk &chunk)const;
-        void show()const;
     private:
         uint8_t x:4;
         uint8_t y:4;
@@ -36,12 +36,13 @@ class Chunk{
 
 class Snake{
     uint8_t live;
+    
     public:
         Snake(const uint8_t live = 2);
+        void clear();
         uint8_t lenght;
         Chunk chunks[64];
-        void clear();
-
+        Direction::Direction direction;
 
 };
 

@@ -74,6 +74,7 @@ void Chunk::show()const {
 }
 
 Snake::Snake(const uint8_t live){
+    this->direction = Direction::stop;
     this->lenght = 3;
     this->live = live;
     this->chunks[0].moveTo(3,3);
@@ -89,4 +90,5 @@ void Snake::clear(){
     this->chunks[0].moveTo(3,3);
     this->chunks[1].moveTo(3,4);
     this->chunks[2].moveTo(3,5);
+    this->direction = Direction::stop;
 }
