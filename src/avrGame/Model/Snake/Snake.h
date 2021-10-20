@@ -3,6 +3,9 @@
 
 #include <avr/io.h>
 
+class Chunk;
+class Snake;
+
 namespace Direction{
     enum Direction{
         stop,
@@ -12,6 +15,42 @@ namespace Direction{
         down
     };
 }
+
+class Memento{
+    public:
+
+
+};
+
+class MementoChunk{
+    public:
+        MementoChunk(Chunk *chunk, uint8_t x, uint8_t y);
+        MementoChunk();
+        void restore();
+        uint8_t getX();
+        uint8_t getY();
+    private:
+        Chunk *chunk;
+        uint8_t x:4;
+        uint8_t y:4;
+
+};
+
+class MementoSnake{
+    public:
+        MementoSnake(Snake *snake, uint8_t lenght, int8_t lives, Chunk *chunks, Direction::Direction direction);
+        MementoSnake();
+        void restore();
+        Direction::Direction direction;
+        Snake *snake;
+        uint8_t lenght:5;
+        int8_t lives:3;
+        MementoChunk chunks[64];
+        void createMemenotChunks(Chunk *chunks);
+    private:
+
+};
+
 
 class Chunk{
 
@@ -29,20 +68,25 @@ class Chunk{
         uint8_t getY(void) const;
         bool operator==(const Chunk &chunk)const;
         bool operator!=(const Chunk &chunk)const;
+        MementoChunk save();
+        void restore(MementoChunk *);
     private:
         uint8_t x:4;
         uint8_t y:4;
 };
 
 class Snake{
-    uint8_t live;
     
     public:
         Snake(const uint8_t live = 2);
+        MementoSnake save();
+        void restore(MementoSnake *);
         void clear();
-        uint8_t lenght;
+        uint8_t lenght:5;
+        int8_t lives:3;
         Chunk chunks[64];
         Direction::Direction direction;
+
 
 };
 

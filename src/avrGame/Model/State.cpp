@@ -72,14 +72,20 @@ void SnakeState::reactOnButtonLeft(void){
 
 
 void SnakeState::capture(){
-
     if(!Logic::timerMove){
+        this->careTaker.saveSnapShot(&this->snake);
         Logic::moveSnake(&this->snake);
         if( Logic::isCollsion(&this->snake)){
-            Logic::addNewScore(&snake);
-            this->snake.clear();
-            Logic::timerMove = 500;
-            return;
+            this->snake.lives--;
+            if( this->snake.lives > 0){
+                this->careTaker.undo();
+            }
+            else{
+                Logic::timerMove = 500;
+                Logic::addNewScore(&snake);
+                this->snake.clear();
+                return;
+            }
         }
         Logic::timerMove = Logic::timeMove;
         Logic::drawSnake(this->snake, avrGame::_matrix);

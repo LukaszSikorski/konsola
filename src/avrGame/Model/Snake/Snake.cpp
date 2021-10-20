@@ -70,13 +70,29 @@ void Chunk::show()const {
     avrGame::rs232.sendStr(" ,y = ");
     avrGame::rs232.sendInt(y);
     avrGame::rs232.sendStr("\n\r");
-
 }
 
-Snake::Snake(const uint8_t live){
+void Chunk::restore(MementoChunk *mementoChunk){
+    this->setX(mementoChunk->getX());
+    this->setY(mementoChunk->getY());
+}
+
+MementoChunk Chunk::save(){
+    return MementoChunk(this, x, y);
+}
+
+uint8_t MementoChunk::getX(){
+    return this->x;
+}
+
+uint8_t MementoChunk::getY(){
+    return this->y;
+}
+
+Snake::Snake(const uint8_t lives){
     this->direction = Direction::stop;
     this->lenght = 3;
-    this->live = live;
+    this->lives = lives;
     this->chunks[0].moveTo(3,3);
     this->chunks[1].moveTo(3,4);
     this->chunks[2].moveTo(3,5);
@@ -91,4 +107,50 @@ void Snake::clear(){
     this->chunks[1].moveTo(3,4);
     this->chunks[2].moveTo(3,5);
     this->direction = Direction::stop;
+    this->lives = 2;
+
+}
+
+void Snake::restore(MementoSnake *mementoSnake){
+    // this->lives = mementoSnake->lives;
+    this->lenght = mementoSnake->lenght;
+    this->direction = mementoSnake->direction;
+    for (uint8_t i =0; i < this->lenght; i++){
+        this->chunks->restore(&mementoSnake->chunks[i]);
+    }
+
+}
+
+MementoChunk::MementoChunk(Chunk *chunk, uint8_t x, uint8_t y){
+    this->chunk = chunk;
+    this->x = x;
+    this->y = y;
+}
+
+
+MementoChunk::MementoChunk(){
+    this->x = 0;
+    this->y = 0;
+}
+
+MementoSnake::MementoSnake(Snake *snake, uint8_t lenght, int8_t lives, Chunk *chunks, Direction::Direction direction){
+    this->snake = snake;
+    this->lenght = lenght;
+    this->lives = lives;
+    this->direction = direction;
+    this->createMemenotChunks(chunks);
+}
+
+MementoSnake::MementoSnake(){
+
+}
+
+void MementoSnake::createMemenotChunks(Chunk *chunks){
+    for(uint8_t i = 0; i < 64; i++){
+        this->chunks[i] = chunks[i].save();
+    }
+}
+
+void MementoSnake::restore(){
+    this->snake->restore(this);
 }

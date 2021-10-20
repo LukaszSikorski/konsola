@@ -4,6 +4,8 @@
 #include "Snake/Snake.h"
 #include <avr/io.h>
 #include "../View/Figures.h"
+#include "CareTaker.h"
+
 #define HUMNAN_SIZE_SPEED 6
 #define SIZE_SPEED HUMNAN_SIZE_SPEED 
 #define TIMER_ANIMATION 60
@@ -44,7 +46,8 @@ class SnakeState:public State{
         void capture(void);
         void update();
         void init();
-        Snake snake;
+        Snake snake = Snake(2);
+        CareTaker careTaker;
 
     private:
 
