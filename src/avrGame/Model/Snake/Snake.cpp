@@ -81,13 +81,7 @@ MementoChunk Chunk::save(){
     return MementoChunk(this, x, y);
 }
 
-uint8_t MementoChunk::getX(){
-    return this->x;
-}
 
-uint8_t MementoChunk::getY(){
-    return this->y;
-}
 
 Snake::Snake(const uint8_t lives){
     this->direction = Direction::stop;
@@ -116,7 +110,7 @@ void Snake::restore(MementoSnake *mementoSnake){
     this->lenght = mementoSnake->lenght;
     this->direction = mementoSnake->direction;
     for (uint8_t i =0; i < this->lenght; i++){
-        this->chunks->restore(&mementoSnake->chunks[i]);
+        this->chunks[i].restore(mementoSnake->getMementoChunk(i));
     }
 
 }
@@ -133,10 +127,18 @@ MementoChunk::MementoChunk(){
     this->y = 0;
 }
 
+uint8_t MementoChunk::getX(){
+    return this->x;
+}
+
+uint8_t MementoChunk::getY(){
+    return this->y;
+}
+
 MementoSnake::MementoSnake(Snake *snake, uint8_t lenght, int8_t lives, Chunk *chunks, Direction::Direction direction){
     this->snake = snake;
     this->lenght = lenght;
-    this->lives = lives;
+    // this->lives = lives;
     this->direction = direction;
     this->createMemenotChunks(chunks);
 }
@@ -145,12 +147,16 @@ MementoSnake::MementoSnake(){
 
 }
 
-void MementoSnake::createMemenotChunks(Chunk *chunks){
+void MementoSnake::createMemenotChunks(Chunk *ptrPhunks){
     for(uint8_t i = 0; i < 64; i++){
-        this->chunks[i] = chunks[i].save();
+        this->chunks[i] = ptrPhunks[i].save();
     }
 }
 
 void MementoSnake::restore(){
     this->snake->restore(this);
+}
+
+MementoChunk *MementoSnake::getMementoChunk(uint8_t index){
+    return &this->chunks[index];
 }

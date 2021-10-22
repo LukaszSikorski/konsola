@@ -40,14 +40,15 @@ class MementoSnake{
     public:
         MementoSnake(Snake *snake, uint8_t lenght, int8_t lives, Chunk *chunks, Direction::Direction direction);
         MementoSnake();
+        MementoChunk *getMementoChunk(uint8_t index);
         void restore();
         Direction::Direction direction;
         Snake *snake;
         uint8_t lenght:5;
         int8_t lives:3;
+    private:
         MementoChunk chunks[64];
         void createMemenotChunks(Chunk *chunks);
-    private:
 
 };
 
