@@ -148,7 +148,7 @@ MementoSnake::MementoSnake(){
 }
 
 void MementoSnake::createMemenotChunks(Chunk *ptrPhunks){
-    for(uint8_t i = 0; i < 64; i++){
+    for(uint8_t i = 0; i < SIZE_SNAKE; i++){
         this->chunks[i] = ptrPhunks[i].save();
     }
 }

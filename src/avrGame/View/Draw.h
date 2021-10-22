@@ -7,7 +7,7 @@
 class Draw{
     public:
      void rect(Matrix &, Rect &,Colors color);
-     void point(Matrix &, uint8_t x, uint8_t y, Colors color);
+     void point(Matrix &, const uint8_t x, const uint8_t y, const Colors color);
 
 };
 #endif //

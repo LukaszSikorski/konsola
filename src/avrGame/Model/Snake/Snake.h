@@ -1,5 +1,6 @@
 #ifndef _SNAKE_H
 #define _SNAKE_H
+#define SIZE_SNAKE 50
 
 #include <avr/io.h>
 
@@ -47,7 +48,7 @@ class MementoSnake{
         uint8_t lenght:5;
         int8_t lives:3;
     private:
-        MementoChunk chunks[64];
+        MementoChunk chunks[SIZE_SNAKE];
         void createMemenotChunks(Chunk *chunks);
 
 };
@@ -85,7 +86,7 @@ class Snake{
         void clear();
         uint8_t lenght:5;
         int8_t lives:3;
-        Chunk chunks[64];
+        Chunk chunks[SIZE_SNAKE];
         Direction::Direction direction;
 
 

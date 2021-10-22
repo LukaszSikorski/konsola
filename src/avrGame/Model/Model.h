@@ -21,7 +21,6 @@ class Model{
         uint8_t x,y;
         Model();
         Model(Matrix *matrix);
-        Rect rects[2];
         void reactOnButtonLeftA(void);
         void reactOnButtonLeftB(void);
         void reactOnButtonDown(void);

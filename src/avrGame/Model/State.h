@@ -118,8 +118,8 @@ class MenuStateSnake:public State{
 class MenuStateTest:public State{
     public:
         MenuStateTest(Model *);
-        void reactOnButtonLeftA(void);
-        void reactOnButtonLeftB(void);
+        // void reactOnButtonLeftA(void);
+        // void reactOnButtonLeftB(void);
         void reactOnButtonTop(void);
         // void reactOnButtonDown(void);
         // void reactOnButtonRight(void);
@@ -129,9 +129,8 @@ class MenuStateTest:public State{
         // void init();
     private:
 
-        void drawLevelSpeed();
-        Games games;
-        uint8_t levelSpeed;
+        // void drawLevelSpeed();
+
 
 };
 

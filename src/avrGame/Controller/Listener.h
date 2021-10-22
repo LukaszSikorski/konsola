@@ -14,8 +14,6 @@ class Listener{
         ListSignals recvButtons;
         FasadeButtons fasadeButtons;
         volatile uint8_t timer;
-        uint8_t x;
-        uint8_t y;
         void update();
         void handleSignals(void);
         void updateTimers(void);

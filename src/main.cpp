@@ -5,7 +5,7 @@
 #define LED_PIN 4
 
 volatile uint16_t TIMER = 100;
-volatile uint16_t TIMER_DRAW = 100;
+// volatile uint16_t TIMER_DRAW = 100;
 
 Controller *controller = &avrGame::controller;
 
@@ -26,6 +26,6 @@ int main(void){
 ISR(TIMER0_OVF_vect){
     controller->updateTimers();
     TCNT0 = 159;
-    if(TIMER) TIMER--;
-    if(TIMER_DRAW) TIMER_DRAW--;
+    // if(TIMER) TIMER--;
+    // if(TIMER_DRAW) TIMER_DRAW--;
 }

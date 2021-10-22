@@ -5,9 +5,9 @@ CareTaker::CareTaker(){
 }
 
 void CareTaker::saveSnapShot(Snake *snake){
-    this->mementoSnake[0] = MementoSnake(snake, snake->lenght, snake->lives, snake->chunks, snake->direction);
-    index++;
-    if(index > 1){
+    this->mementoSnake[index] = MementoSnake(snake, snake->lenght, snake->lives, snake->chunks, snake->direction);
+    ++index;
+    if(index > SIZE_SNAPSHOT){
         index = 0;
     }
 }
@@ -16,8 +16,8 @@ void CareTaker::undo(){
     int8_t tmpIndex = index - 1;
     if (tmpIndex < 0)
     {
-        tmpIndex = 1;
+        tmpIndex = SIZE_SNAPSHOT;
     }
     
-    this->mementoSnake[0].restore();
+    this->mementoSnake[index].restore();
 }

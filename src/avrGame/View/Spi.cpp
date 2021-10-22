@@ -7,12 +7,12 @@ Spi::Spi(){
     SPCR = ( 1 << SPE ) | ( 1 << MSTR ) | ( 1 << SPR1 ) | ( 1 << SPR0 );
 }
 
-void Spi::sendByte(uint8_t data){
+void Spi::sendByte(uint8_t data)const{
     SPDR = data;
     while ( ! (SPSR & (1 << SPIF)));
 }
 
-void Spi::sendBytes(uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4){
+void Spi::sendBytes(uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4)const{
     sendByte(data1);
     sendByte(data2);
     sendByte(data3);

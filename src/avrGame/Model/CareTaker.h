@@ -4,6 +4,8 @@
 #include <avr/io.h>
 #include "Snake/Snake.h"
 
+#define SIZE_SNAPSHOT 2
+
 class CareTaker{
     public:
         CareTaker();
@@ -11,7 +13,7 @@ class CareTaker{
         void undo();
 
     private:
-        MementoSnake mementoSnake[1];
+        MementoSnake mementoSnake[SIZE_SNAPSHOT];
         int8_t index;
 
 };
