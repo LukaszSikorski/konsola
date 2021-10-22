@@ -5,9 +5,7 @@
 #include "../Snake.h"
 #include "../../../avrGame.h"
 
-const Colors SNAKE_HEAD = Colors::green;
-const Colors SNAKE_TAIL = Colors::red;
-const Colors SNAKE_SCORE = Colors::blue;
+
 
 
 
@@ -17,6 +15,7 @@ class Logic{
     public:
         static void drawChunk(Chunk &,Colors color ,Matrix &matrix);
         static void drawScore(Colors color ,Matrix &matrix);
+        static void drawLive(Colors color ,Matrix &matrix);
         static void drawSnake(Snake &, Matrix &matrix);
         static void moveChunk( Chunk *chunk, Direction::Direction const *);
         static void moveSnake( Snake *snake);
@@ -34,6 +33,8 @@ class Logic{
         static uint16_t timerMove;
         static uint16_t timeMove;
         static Chunk score;
+        static Chunk live;
+        static bool pause;
 
 
 };

@@ -3,6 +3,8 @@
 uint16_t Logic::timerMove = 200;
 uint16_t Logic::timeMove = 200;
 Chunk Logic::score = Chunk(2,2);
+Chunk Logic::live = Chunk(0,0);
+bool Logic::pause = false;
 
 void Logic::drawChunk(Chunk &chunk,Colors color, Matrix &matrix){
     uint8_t x = chunk.getX();
@@ -14,6 +16,11 @@ void Logic::drawChunk(Chunk &chunk,Colors color, Matrix &matrix){
 
 void Logic::drawScore(Colors color, Matrix &matrix){
     Logic::drawChunk(Logic::score, color, matrix);
+}
+
+void Logic::drawLive(Colors color, Matrix &matrix){
+    Logic::drawChunk(Logic::live, color, matrix);
+
 }
 
 void Logic::moveChunk( Chunk *chunk, Direction::Direction const *direction){

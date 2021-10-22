@@ -51,40 +51,55 @@ void SnakeState::reactOnButtonLeftA(void){
 
 void SnakeState::reactOnButtonLeftB(void){
     snake.direction = Direction::stop;
+    Logic::pause = true;
 }
 
 void SnakeState::reactOnButtonTop(void){
     Logic::moveUp( &this->snake);
     avrGame::ToggleLed();   
+    Logic::pause = false;
+
 }
 
 void SnakeState::reactOnButtonDown(void){
     Logic::moveDown(&this->snake);
+    Logic::pause = false;
+
 }
 
 void SnakeState::reactOnButtonRight(void){
     Logic::moveRight(&this->snake);
+    Logic::pause = false;
+
 }
 
 void SnakeState::reactOnButtonLeft(void){
     Logic::moveLeft(&this->snake);
+    Logic::pause = false;
+
 }
 
 
 void SnakeState::capture(){
-    if(!Logic::timerMove){
-        this->careTaker.saveSnapShot(&this->snake);
-        Logic::moveSnake(&this->snake);
-        if( Logic::isCollsion(&this->snake)){
-            this->snake.lives--;
-            if( this->snake.lives > 0){
-                this->careTaker.undo();
-            }
-            else{
-                Logic::timerMove = 500;
-                Logic::addNewScore(&snake);
-                this->snake.clear();
-                return;
+    if(!Logic::timerMove ){
+        if(Logic::pause == false){
+            this->careTaker.saveSnapShot(&this->snake);
+            Logic::moveSnake(&this->snake);
+            if( Logic::isCollsion(&this->snake)){
+                this->snake.lives--;
+                if( this->snake.lives > 0){
+                    this->careTaker.undo();
+                    // Logic::timerMove = 1000;
+                    this->model->animationState.setTarget(this, false);
+                    Logic::pause = true;
+                }
+                else{
+                    Logic::timerMove = 500;
+                    Logic::addNewScore(&snake);
+                    this->model->animationState.setTarget(this, true);
+                    // this->snake.clear();
+                    return;
+                }
             }
         }
         Logic::timerMove = Logic::timeMove;
@@ -158,6 +173,7 @@ AnimationState::AnimationState(Model *model):State(model){
 void AnimationState::init(){
     this->timerAnimation = TIMER_ANIMATION;
     this->loading = 0;
+    this->ini = true;
 }
 
 void AnimationState::drawAnimation(){
@@ -177,8 +193,10 @@ void AnimationState::drawAnimation(){
         }
         return;
     }
+    if(ini){
+        this->targetState->init();
+    }
     this->init();
-    this->targetState->init();
     this->model->state = this->targetState;
 }
 
@@ -186,7 +204,8 @@ void AnimationState::capture(){
     this->drawAnimation();
 }
 
-State *AnimationState::setTarget(State *target){
+State *AnimationState::setTarget(State *target, bool init){
+    this->ini = init;
     this->model->state = &this->model->animationState;
     this->model->animationState.targetState = target;
     return this;

@@ -11,6 +11,12 @@
 #define TIMER_ANIMATION 60
 #define SIZE_STATES 2
 #define COLOR_ANIMATION Colors::green
+#define SNAKE_LIVES 3
+#define SNAKE_SCORE  Colors::blue
+#define SNAKE_HEAD Colors::green
+#define SNAKE_TAIL Colors::red
+#define SNAKE_LIVE Colors::purple
+
 class Model;
 
 enum Games{
@@ -47,7 +53,7 @@ class SnakeState:public State{
         void capture(void);
         void update();
         void init();
-        Snake snake = Snake(2);
+        Snake snake = Snake(SNAKE_LIVES);
         CareTaker careTaker;
 
     private:
@@ -86,12 +92,13 @@ class AnimationState:public State{
         void capture(void);
         // void update();
         void init();
-        inline State *setTarget(State *target);
+        inline State *setTarget(State *target, bool = true);
         State *targetState;
     private:
         void drawAnimation();
         uint8_t timerAnimation;
         uint8_t loading;
+        bool ini;
 
 
 };

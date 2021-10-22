@@ -101,7 +101,7 @@ void Snake::clear(){
     this->chunks[1].moveTo(3,4);
     this->chunks[2].moveTo(3,5);
     this->direction = Direction::stop;
-    this->lives = 2;
+    this->lives = SNAKE_LIVES;
 
 }
 
