@@ -156,8 +156,8 @@ AnimationState::AnimationState(Model *model):State(model){
 
 
 void AnimationState::init(){
-    timerAnimation = TIMER_ANIMATION;
-    loading = 0;
+    this->timerAnimation = TIMER_ANIMATION;
+    this->loading = 0;
 }
 
 void AnimationState::drawAnimation(){
@@ -167,7 +167,7 @@ void AnimationState::drawAnimation(){
 
             for(uint8_t i = 1; i <= loading; i++){
                 for (uint8_t j = 1; j <= 8; j++){
-                    avrGame::draw.point(avrGame::_matrix, i, j, Colors::green);
+                    avrGame::draw.point(avrGame::_matrix, i, j, COLOR_ANIMATION);
 
                 }
             }

@@ -109,7 +109,7 @@ void Snake::restore(MementoSnake *mementoSnake){
     // this->lives = mementoSnake->lives;
     this->lenght = mementoSnake->lenght;
     this->direction = mementoSnake->direction;
-    for (uint8_t i =0; i < this->lenght; i++){
+    for (uint8_t i = 0; i < this->lenght; i++){
         this->chunks[i].restore(mementoSnake->getMementoChunk(i));
     }
 

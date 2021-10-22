@@ -10,6 +10,7 @@
 #define SIZE_SPEED HUMNAN_SIZE_SPEED 
 #define TIMER_ANIMATION 60
 #define SIZE_STATES 2
+#define COLOR_ANIMATION Colors::green
 class Model;
 
 enum Games{
