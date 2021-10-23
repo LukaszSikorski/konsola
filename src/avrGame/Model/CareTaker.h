@@ -2,7 +2,7 @@
 #define _CARETAKER_H
 
 #include <avr/io.h>
-#include "Snake/Snake.h"
+#include "Games/Snake.h"
 
 #define SIZE_SNAPSHOT 2
 

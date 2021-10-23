@@ -1,12 +1,12 @@
 #ifndef _STATE_H
 #define _STATE_H
 
-#include "Snake/Snake.h"
+#include "Games/Snake.h"
 #include <avr/io.h>
 #include "../View/Figures.h"
 #include "CareTaker.h"
 
-#define HUMNAN_SIZE_SPEED 6
+#define HUMNAN_SIZE_SPEED 8
 #define SIZE_SPEED HUMNAN_SIZE_SPEED 
 #define TIMER_ANIMATION 60
 #define SIZE_STATES 2
@@ -18,7 +18,7 @@
 #define SNAKE_LIVE Colors::purple
 #define LIVE_CYCLE 10
 #define MAX_LIVE 3
-#define ROUND_FOR_NEW_LIVE 3
+#define ROUND_FOR_NEW_LIVE 8
 
 class Model;
 

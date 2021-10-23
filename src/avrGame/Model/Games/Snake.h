@@ -1,6 +1,6 @@
 #ifndef _SNAKE_H
 #define _SNAKE_H
-#define SIZE_SNAKE 20
+#define SIZE_SNAKE 50
 
 #include <avr/io.h>
 

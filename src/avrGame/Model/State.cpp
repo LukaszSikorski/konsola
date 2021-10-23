@@ -3,7 +3,7 @@
 #include "../avrGame.h"
 #include "../View/Colors.h"
 #include <util/delay.h>
-#include "Snake/Logic/Logic.h"
+#include "Games/Logic/Logic.h"
 
 
 State::State(Model *model){
@@ -116,9 +116,10 @@ void SnakeState::init(){
     this->snake.clear();
     Logic::score = Logic::getNewChunk(&snake);
     Logic::live.chunk = Chunk(0, 0);
+    Logic::timerMove = 1;
+    Logic::pause = true;
     avrGame::_matrix.fill();
     avrGame::display.flip(&avrGame::_matrix);
-    Logic::timerMove = 1;
 }
 MenuState::MenuState(Model *model):State(model){
     index = 0;
@@ -226,12 +227,12 @@ void MenuStateSnake::capture(){
 }
 
 void MenuStateSnake::reactOnButtonLeftA(void){
-    Logic::timeMove = (SIZE_SPEED * 20) - (levelSpeed * 20) + 10;
+    Logic::timeMove = (SIZE_SPEED * 15) - (levelSpeed * 15) + 10;
     this->model->state = this->model->animationState.setTarget(&this->model->snakeState);
 }
 
 void MenuStateSnake::reactOnButtonLeftB(void){
-    Logic::timeMove = (SIZE_SPEED * 20) - (levelSpeed * 20) + 10;
+    Logic::timeMove = (SIZE_SPEED * 15) - (levelSpeed * 15) + 25;
     this->model->state = this->model->animationState.setTarget(&this->model->menuState);
 }
 
