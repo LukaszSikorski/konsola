@@ -16,6 +16,9 @@
 #define SNAKE_HEAD Colors::green
 #define SNAKE_TAIL Colors::red
 #define SNAKE_LIVE Colors::purple
+#define LIVE_CYCLE 10
+#define MAX_LIVE 3
+#define ROUND_FOR_NEW_LIVE 3
 
 class Model;
 

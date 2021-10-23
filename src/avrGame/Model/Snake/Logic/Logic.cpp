@@ -3,7 +3,7 @@
 uint16_t Logic::timerMove = 200;
 uint16_t Logic::timeMove = 200;
 Chunk Logic::score = Chunk(2,2);
-Chunk Logic::live = Chunk(0,0);
+Live Logic::live = Live(LIVE_CYCLE);
 bool Logic::pause = false;
 
 void Logic::drawChunk(Chunk &chunk,Colors color, Matrix &matrix){
@@ -19,7 +19,7 @@ void Logic::drawScore(Colors color, Matrix &matrix){
 }
 
 void Logic::drawLive(Colors color, Matrix &matrix){
-    Logic::drawChunk(Logic::live, color, matrix);
+    Logic::drawChunk(*Logic::live.getChunk(), color, matrix);
 
 }
 
@@ -39,6 +39,7 @@ void Logic::moveChunk( Chunk *chunk, Direction::Direction const *direction){
 }
 
 void Logic::moveSnake(Snake *snake){
+    Logic::setDirectionSnake(snake);
     if (snake->direction != Direction::stop){
         Chunk last = snake->chunks[ snake->lenght - 1];
         for(uint8_t i = snake->lenght - 1; i > 0; i--){
@@ -46,28 +47,41 @@ void Logic::moveSnake(Snake *snake){
             snake->chunks[i].moveTo(next);
         }
         Logic::moveChunk(&snake->chunks[0], &snake->direction);
-        if (Logic::isOnScore(snake, &Logic::score)){
+        if (Logic::isSnakeOnChunk(snake, &Logic::score)){
             Logic::addChunkToSnake(snake, &last);
-            Logic::addNewScore(snake);
+            Logic::score = Logic::getNewChunk(snake);
         }
+        else if(Logic::isSnakeOnChunk(snake, &Logic::live.chunk)){
+            Logic::addLiveToSnake(snake);
+            Logic::live.chunk = Chunk(0, 0);
+            // Logic::live = Logic::getNewChunk(snake); 
+        }
+        if(Logic::live.isCycleZero()){
+            Logic::live.chunk = Chunk(0, 0);
+        }
+        if(Logic::live.isCycleEqual(-ROUND_FOR_NEW_LIVE) && snake->lives < MAX_LIVE){
+            Logic::live.chunk = Logic::getNewChunk(snake);
+            Logic::live.setCycle(LIVE_CYCLE);
+        }
+        --Logic::live;
     }
 
 }
 
 void Logic::moveLeft(Snake *snake){
-    if (snake->direction != Direction::right) snake->direction = Direction::left;
+    if (snake->lastDirection != Direction::right) snake->lastDirection = Direction::left;
 }
 
 void Logic::moveRight(Snake *snake){
-    if (snake->direction != Direction::left) snake->direction = Direction::right;
+    if (snake->lastDirection != Direction::left) snake->lastDirection = Direction::right;
 }
 
 void Logic::moveUp(Snake *snake){
-    if (snake->direction != Direction::down) snake->direction = Direction::up;
+    if (snake->lastDirection != Direction::down) snake->lastDirection = Direction::up;
 }
 
 void Logic::moveDown(Snake *snake){
-    if (snake->direction != Direction::up) snake->direction = Direction::down;
+    if (snake->lastDirection != Direction::up) snake->lastDirection = Direction::down;
 }
 
 void Logic::drawSnake(Snake &snake, Matrix &matrix){
@@ -80,7 +94,7 @@ void Logic::drawSnake(Snake &snake, Matrix &matrix){
     Logic::drawChunk(*chunk, SNAKE_HEAD,matrix);
 }
 
-bool Logic::isOnScore(Snake *snake, Chunk *chunk){
+bool Logic::isSnakeOnChunk(Snake *snake, Chunk *chunk){
     bool result = false;
     if( snake->chunks[0] == *chunk ){
         result = true;
@@ -110,7 +124,8 @@ Chunk Logic::getRandomChunk(){
 bool Logic::isFreePos( Snake *snake, Chunk *chunk){
     bool result = true;
     for (uint8_t i = 0; i < snake->lenght; i++){
-        if (snake->chunks[i] == *chunk){
+        // TODO: chunk nie potrzebnie przyjemuje wartosc zamiast wskaznika do porownania
+        if (snake->chunks[i] == *chunk || Logic::live == chunk || Logic::score == *chunk){
             result = false;
             break;
         }
@@ -118,14 +133,14 @@ bool Logic::isFreePos( Snake *snake, Chunk *chunk){
     return result;
 }
 
-void Logic::addNewScore(Snake *snake){
+Chunk Logic::getNewChunk(Snake *snake){
     bool condition = false;
     Chunk chunk;
     while (!condition){
         chunk = Logic::getRandomChunk();
         condition = Logic::isFreePos(snake, &chunk);
     }
-    Logic::score = chunk;
+    return chunk;
 }
 
 bool Logic::isCollsion(Snake *snake){
@@ -138,4 +153,27 @@ bool Logic::isCollsion(Snake *snake){
         }
     }
     return result;
+}
+
+void Logic::addLiveToSnake(Snake *snake){
+    if(snake->lives < MAX_LIVE){
+        snake->lives++;
+        avrGame::ToggleLed();
+    }
+}
+
+void Logic::setDirectionSnake(Snake *snake){
+    if (snake->lastDirection == Direction::up && snake->direction != Direction::down)
+    {
+        snake->direction = snake->lastDirection;
+    }
+    else if( snake->lastDirection == Direction::down && snake->direction != Direction::up){
+        snake->direction = snake->lastDirection;
+    }
+    else if( snake->lastDirection == Direction::left && snake->direction != Direction::right){
+        snake->direction = snake->lastDirection;
+    }
+    else if( snake->lastDirection == Direction::right && snake->direction != Direction::left){
+        snake->direction = snake->lastDirection;
+    }
 }

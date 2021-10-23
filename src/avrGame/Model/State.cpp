@@ -42,7 +42,6 @@ SnakeState::SnakeState(Model *model):State(model){
 }
 
 void SnakeState::reactOnButtonLeftA(void){
-    avrGame::ToggleLed();  
     if(snake.direction == Direction::stop){
         this->model->state = this->model->animationState.setTarget(&this->model->menuStateSnake);
         init();
@@ -56,7 +55,6 @@ void SnakeState::reactOnButtonLeftB(void){
 
 void SnakeState::reactOnButtonTop(void){
     Logic::moveUp( &this->snake);
-    avrGame::ToggleLed();   
     Logic::pause = false;
 
 }
@@ -95,7 +93,7 @@ void SnakeState::capture(){
                 }
                 else{
                     Logic::timerMove = 500;
-                    Logic::addNewScore(&snake);
+                    // Logic::addNewScore(&snake);
                     this->model->animationState.setTarget(this, true);
                     // this->snake.clear();
                     return;
@@ -105,6 +103,7 @@ void SnakeState::capture(){
         Logic::timerMove = Logic::timeMove;
         Logic::drawSnake(this->snake, avrGame::_matrix);
         Logic::drawScore(SNAKE_SCORE, avrGame::_matrix);
+        Logic::drawLive(Colors::purple, avrGame::_matrix);
         avrGame::display.flip(&avrGame::_matrix);
     }
 }
@@ -115,6 +114,8 @@ void SnakeState::update(){
 
 void SnakeState::init(){
     this->snake.clear();
+    Logic::score = Logic::getNewChunk(&snake);
+    Logic::live.chunk = Chunk(0, 0);
     avrGame::_matrix.fill();
     avrGame::display.flip(&avrGame::_matrix);
     Logic::timerMove = 1;

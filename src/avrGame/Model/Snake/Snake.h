@@ -88,6 +88,7 @@ class Snake{
         int8_t lives:3;
         Chunk chunks[SIZE_SNAKE];
         Direction::Direction direction;
+        Direction::Direction lastDirection;
 
 
 };

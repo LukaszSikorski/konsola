@@ -4,6 +4,7 @@
 #include <avr/io.h>
 #include "../Snake.h"
 #include "../../../avrGame.h"
+#include "../Live.h"
 
 
 
@@ -24,19 +25,21 @@ class Logic{
         static void moveUp(Snake *snake);
         static void moveDown(Snake *snake);
         static Chunk getRandomChunk();
-        static void addNewScore(Snake *snake);
         static void addChunkToSnake(Snake *snake, Chunk *chunk);
         static bool isFreePos(Snake *snake,Chunk *chunk);
-        static bool isOnScore(Snake *snake, Chunk *chunk);
+        static bool isSnakeOnChunk(Snake *snake, Chunk *chunk);
         static bool isCollsion(Snake *snake);
+        static Chunk getNewChunk(Snake *snake);
         static uint8_t getRandomPos(uint8_t from, uint8_t to);
         static uint16_t timerMove;
         static uint16_t timeMove;
         static Chunk score;
-        static Chunk live;
+        static Live live;
         static bool pause;
 
-
+    private:
+        static void addLiveToSnake(Snake *snake);
+        static void setDirectionSnake(Snake *snake);
 };
 
 
