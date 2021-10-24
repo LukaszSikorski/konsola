@@ -65,11 +65,11 @@ bool Chunk::operator!=(const Chunk &chunk)const{
 }
 
 void Chunk::show()const {
-    avrGame::rs232.sendStr("x = ");
-    avrGame::rs232.sendInt(x);
-    avrGame::rs232.sendStr(" ,y = ");
-    avrGame::rs232.sendInt(y);
-    avrGame::rs232.sendStr("\n\r");
+    // avrGame::rs232.sendStr("x = ");
+    // avrGame::rs232.sendInt(x);
+    // avrGame::rs232.sendStr(" ,y = ");
+    // avrGame::rs232.sendInt(y);
+    // avrGame::rs232.sendStr("\n\r");
 }
 
 void Chunk::restore(MementoChunk *mementoChunk){
@@ -84,12 +84,8 @@ MementoChunk Chunk::save(){
 
 
 Snake::Snake(const uint8_t lives){
-    this->direction = Direction::stop;
-    this->lenght = 3;
     this->lives = lives;
-    this->chunks[0].moveTo(3,3);
-    this->chunks[1].moveTo(3,4);
-    this->chunks[2].moveTo(3,5);
+    clear();
 }
 
 void Snake::clear(){

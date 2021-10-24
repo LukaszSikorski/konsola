@@ -43,7 +43,7 @@ SnakeState::SnakeState(Model *model):State(model){
 
 void SnakeState::reactOnButtonLeftA(void){
     if(snake.direction == Direction::stop){
-        this->model->state = this->model->animationState.setTarget(&this->model->menuStateSnake);
+        this->model->animationState.setTarget(&this->model->menuStateSnake);
         init();
     }
 }
@@ -101,9 +101,9 @@ void SnakeState::capture(){
             }
         }
         Logic::timerMove = Logic::timeMove;
-        Logic::drawSnake(this->snake, avrGame::_matrix);
-        Logic::drawScore(SNAKE_SCORE, avrGame::_matrix);
-        Logic::drawLive(Colors::purple, avrGame::_matrix);
+        Logic::drawSnake(this->snake);
+        Logic::drawScore(SNAKE_SCORE);
+        Logic::drawLive(Colors::purple);
         avrGame::display.flip(&avrGame::_matrix);
     }
 }
@@ -118,7 +118,6 @@ void SnakeState::init(){
     Logic::live.chunk = Chunk(0, 0);
     Logic::timerMove = 1;
     Logic::pause = true;
-    avrGame::_matrix.fill();
     avrGame::display.flip(&avrGame::_matrix);
 }
 MenuState::MenuState(Model *model):State(model){
@@ -130,7 +129,7 @@ MenuState::MenuState(Model *model):State(model){
 }
 
 void MenuState::reactOnButtonLeftA(void){
-    this->model->state = this->model->animationState.setTarget(this->current);
+    this->model->animationState.setTarget(this->current);
 
 }
 
@@ -206,11 +205,10 @@ void AnimationState::capture(){
     this->drawAnimation();
 }
 
-State *AnimationState::setTarget(State *target, bool init){
+void AnimationState::setTarget(State *target, bool init){
     this->ini = init;
     this->model->state = &this->model->animationState;
     this->model->animationState.targetState = target;
-    return this;
 }
 
 MenuStateSnake::MenuStateSnake(Model *model):State(model){
@@ -228,12 +226,12 @@ void MenuStateSnake::capture(){
 
 void MenuStateSnake::reactOnButtonLeftA(void){
     Logic::timeMove = (SIZE_SPEED * 15) - (levelSpeed * 15) + 10;
-    this->model->state = this->model->animationState.setTarget(&this->model->snakeState);
+    this->model->animationState.setTarget(&this->model->snakeState);
 }
 
 void MenuStateSnake::reactOnButtonLeftB(void){
     Logic::timeMove = (SIZE_SPEED * 15) - (levelSpeed * 15) + 25;
-    this->model->state = this->model->animationState.setTarget(&this->model->menuState);
+    this->model->animationState.setTarget(&this->model->menuState);
 }
 
 void MenuStateSnake::reactOnButtonTop(void){
@@ -271,11 +269,11 @@ void MenuStateTicTacToe::capture(){
 }
 
 void MenuStateTicTacToe::reactOnButtonLeftA(void){
-    this->model->state = this->model->animationState.setTarget(&model->stateTicTacToe);
+    this->model->animationState.setTarget(&model->stateTicTacToe);
 }
 
 void MenuStateTicTacToe::reactOnButtonLeftB(void){
-    this->model->state = this->model->animationState.setTarget(&model->menuState);
+    // this->model->state = this->model->animationState.setTarget(&model->menuState);
 
 }
 
@@ -297,11 +295,11 @@ void StateTicTacToe::capture(){
 }
 
 void StateTicTacToe::reactOnButtonLeftA(void){
-    this->model->state = this->model->animationState.setTarget(&model->stateTicTacToe);
+    this->model->animationState.setTarget(&model->stateTicTacToe);
 }
 
 void StateTicTacToe::reactOnButtonLeftB(void){
-    this->model->state = this->model->animationState.setTarget(&model->menuStateTicTacToe);
+    this->model->animationState.setTarget(&model->menuStateTicTacToe);
 
 }
 

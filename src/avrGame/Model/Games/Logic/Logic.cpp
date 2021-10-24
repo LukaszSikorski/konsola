@@ -6,20 +6,20 @@ Chunk Logic::score = Chunk(2,2);
 Live Logic::live = Live(LIVE_CYCLE);
 bool Logic::pause = false;
 
-void Logic::drawChunk(Chunk &chunk,Colors color, Matrix &matrix){
+void Logic::drawChunk(Chunk &chunk,Colors color){
     uint8_t x = chunk.getX();
     uint8_t y = chunk.getY();
     Rect rect = avrGame::rect(x, y, 1, 1);
-    avrGame::draw.rect(matrix, rect, color);
+    avrGame::draw.rect(avrGame::_matrix, rect, color);
 
 }
 
-void Logic::drawScore(Colors color, Matrix &matrix){
-    Logic::drawChunk(Logic::score, color, matrix);
+void Logic::drawScore(Colors color){
+    Logic::drawChunk(Logic::score, color);
 }
 
-void Logic::drawLive(Colors color, Matrix &matrix){
-    Logic::drawChunk(*Logic::live.getChunk(), color, matrix);
+void Logic::drawLive(Colors color){
+    Logic::drawChunk(*Logic::live.getChunk(), color);
 
 }
 
@@ -84,14 +84,14 @@ void Logic::moveDown(Snake *snake){
     if (snake->lastDirection != Direction::up) snake->lastDirection = Direction::down;
 }
 
-void Logic::drawSnake(Snake &snake, Matrix &matrix){
+void Logic::drawSnake(Snake &snake){
     Chunk *chunk;
     for(uint8_t i = 1; i < snake.lenght; i++){
         Chunk *chunk = &snake.chunks[i];
-        Logic::drawChunk(*chunk, SNAKE_TAIL, matrix);
+        Logic::drawChunk(*chunk, SNAKE_TAIL);
     }
     chunk = &snake.chunks[0];
-    Logic::drawChunk(*chunk, SNAKE_HEAD,matrix);
+    Logic::drawChunk(*chunk, SNAKE_HEAD);
 }
 
 bool Logic::isSnakeOnChunk(Snake *snake, Chunk *chunk){

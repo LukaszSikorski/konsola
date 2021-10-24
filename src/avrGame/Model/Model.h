@@ -30,6 +30,7 @@ class Model{
         void reactOnButtonRight(void);
         void capture(void);
         void update(void);
+        void setAnimationTarget(State *state, bool ini);
 };
 
 #endif // _MODEL_H

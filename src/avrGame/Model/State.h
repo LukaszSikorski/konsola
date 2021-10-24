@@ -114,7 +114,7 @@ class AnimationState:public State{
         void capture(void);
         // void update();
         void init();
-        inline State *setTarget(State *target, bool = true);
+        inline void setTarget(State *target, bool = true);
         State *targetState;
     private:
         void drawAnimation();

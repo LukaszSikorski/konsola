@@ -14,10 +14,10 @@
 
 class Logic{
     public:
-        static void drawChunk(Chunk &,Colors color ,Matrix &matrix);
-        static void drawScore(Colors color ,Matrix &matrix);
-        static void drawLive(Colors color ,Matrix &matrix);
-        static void drawSnake(Snake &, Matrix &matrix);
+        static void drawChunk(Chunk &,Colors color);
+        static void drawScore(Colors color);
+        static void drawLive(Colors color );
+        static void drawSnake(Snake &);
         static void drawTicTacToe(TicTacToe *ticTacToe, Matrix &matrix);
         static void drawField(uint8_t x, uint8_t y, Colors color, Matrix &matrix);
         static void moveChunk( Chunk *chunk, Direction::Direction const *);

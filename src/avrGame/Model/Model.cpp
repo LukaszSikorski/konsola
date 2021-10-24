@@ -4,7 +4,7 @@
 
 Model::Model(Matrix *matrix){
     this->matrix = matrix;
-    this->animationState.targetState = &stateTicTacToe;
+    this->animationState.targetState = &menuState;
     this->state = &animationState;
 }
 
@@ -40,4 +40,8 @@ void Model::capture(){
 void Model::update(){
     this->state->update();
     
+}
+
+void Model::setAnimationTarget(State *state, bool ini){
+    // this->state = this->animationState.setTarget(state, ini);
 }
