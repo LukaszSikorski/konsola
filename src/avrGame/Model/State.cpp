@@ -125,7 +125,7 @@ MenuState::MenuState(Model *model):State(model){
     index = 0;
     games = Games::snake;
     this->states[0] = &model->menuStateSnake,
-    this->states[1] = &model->menuStateTest,
+    this->states[1] = &model->menuStateTicTacToe,
     this->current = states[index];
 }
 
@@ -260,27 +260,51 @@ void MenuStateSnake::drawLevelSpeed(){
     }
 }
 
-MenuStateTest::MenuStateTest(Model *model):State(model){
+MenuStateTicTacToe::MenuStateTicTacToe(Model *model):State(model){
 
 }
 
-void MenuStateTest::capture(){
-    avrGame::draw.point(avrGame::_matrix, 1, 1, SNAKE_HEAD);
-    // avrGame::draw.point(avrGame::_matrix, 2, 2, SNAKE_TAIL);
-    // avrGame::draw.point(avrGame::_matrix, 3, 3, SNAKE_TAIL);
-    // avrGame::draw.point(avrGame::_matrix, 4, 4, SNAKE_SCORE);
+void MenuStateTicTacToe::capture(){
+    avrGame::draw.point(avrGame::_matrix, 3, 3, Colors::purple);
     avrGame::_matrix.flip();
+
 }
 
-// void MenuStateTest::reactOnButtonLeftA(void){
-
-// }
-
-// void MenuStateTest::reactOnButtonLeftB(void){
-
-// }
-
-void MenuStateTest::reactOnButtonTop(void){
-    this->model->state = this->model->animationState.setTarget(&this->model->snakeState);
+void MenuStateTicTacToe::reactOnButtonLeftA(void){
+    this->model->state = this->model->animationState.setTarget(&model->stateTicTacToe);
 }
 
+void MenuStateTicTacToe::reactOnButtonLeftB(void){
+    this->model->state = this->model->animationState.setTarget(&model->menuState);
+
+}
+
+void MenuStateTicTacToe::reactOnButtonTop(void){
+    // this->model->state = this->model->animationState.setTarget(&this->model->snakeState);
+}
+
+StateTicTacToe::StateTicTacToe(Model* model):State(model){
+
+}
+
+void StateTicTacToe::capture(){
+    if(!Logic::timerMove ){
+        Logic::drawTicTacToe(&this->ticTacToe, avrGame::_matrix);
+        avrGame::display.flip(&avrGame::_matrix);
+        Logic::timerMove = 100;
+    }
+
+}
+
+void StateTicTacToe::reactOnButtonLeftA(void){
+    this->model->state = this->model->animationState.setTarget(&model->stateTicTacToe);
+}
+
+void StateTicTacToe::reactOnButtonLeftB(void){
+    this->model->state = this->model->animationState.setTarget(&model->menuStateTicTacToe);
+
+}
+
+void StateTicTacToe::update(){
+    Logic::timerMove--;
+}

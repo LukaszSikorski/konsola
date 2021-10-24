@@ -14,4 +14,12 @@ class Rect{
         uint8_t y:4;
 };
 
+// class Line{
+//         Line(const uint8_t x, const uint8_t y, const uint8_t lenght);
+//         Line();
+//         uint8_t x:4;
+//         uint8_t y:4;
+//         uint8_t lenght:4;
+// };
+
 #endif //

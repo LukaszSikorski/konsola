@@ -4,7 +4,7 @@
 
 Model::Model(Matrix *matrix){
     this->matrix = matrix;
-    this->animationState.targetState = &menuState;
+    this->animationState.targetState = &stateTicTacToe;
     this->state = &animationState;
 }
 

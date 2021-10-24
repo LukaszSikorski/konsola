@@ -31,3 +31,7 @@ void Draw::rect(Matrix &matrix, Rect & rect,Colors color){
         }
     }
 }
+
+// void Draw::line(Matrix & matrix, Line &line, Colors color){
+
+// }

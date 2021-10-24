@@ -16,7 +16,8 @@ class Model{
         MenuState menuState = MenuState(this);
         AnimationState animationState = AnimationState(this);
         MenuStateSnake menuStateSnake = MenuStateSnake(this);
-        MenuStateTest menuStateTest = MenuStateTest(this);
+        MenuStateTicTacToe menuStateTicTacToe = MenuStateTicTacToe(this);
+        StateTicTacToe stateTicTacToe = StateTicTacToe(this);
         Matrix *matrix;
         uint8_t x,y;
         Model();

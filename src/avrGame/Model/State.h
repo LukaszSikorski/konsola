@@ -5,6 +5,7 @@
 #include <avr/io.h>
 #include "../View/Figures.h"
 #include "CareTaker.h"
+#include "Games/TicTacToe.h"
 
 #define HUMNAN_SIZE_SPEED 8
 #define SIZE_SPEED HUMNAN_SIZE_SPEED 
@@ -60,6 +61,24 @@ class SnakeState:public State{
         CareTaker careTaker;
 
     private:
+
+};
+
+class StateTicTacToe:public State{
+    public:
+        StateTicTacToe(Model *);
+        void reactOnButtonLeftA(void);
+        void reactOnButtonLeftB(void);
+        // void reactOnButtonTop(void);
+        // void reactOnButtonDown(void);
+        // void reactOnButtonRight(void);
+        // void reactOnButtonLeft(void);
+        void capture(void);
+        void update();
+        // void init();
+
+    private:
+        TicTacToe ticTacToe;
 
 };
 
@@ -126,20 +145,19 @@ class MenuStateSnake:public State{
 
 };
 
-class MenuStateTest:public State{
+class MenuStateTicTacToe:public State{
     public:
-        MenuStateTest(Model *);
-        // void reactOnButtonLeftA(void);
-        // void reactOnButtonLeftB(void);
+        MenuStateTicTacToe(Model *);
+        void reactOnButtonLeftA(void);
+        void reactOnButtonLeftB(void);
         void reactOnButtonTop(void);
         // void reactOnButtonDown(void);
         // void reactOnButtonRight(void);
         // void reactOnButtonLeft(void);
         void capture(void);
-        // void update();
+        // void update(void);
         // void init();
     private:
-
         // void drawLevelSpeed();
 
 

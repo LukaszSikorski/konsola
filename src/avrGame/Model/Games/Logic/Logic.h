@@ -18,6 +18,8 @@ class Logic{
         static void drawScore(Colors color ,Matrix &matrix);
         static void drawLive(Colors color ,Matrix &matrix);
         static void drawSnake(Snake &, Matrix &matrix);
+        static void drawTicTacToe(TicTacToe *ticTacToe, Matrix &matrix);
+        static void drawField(uint8_t x, uint8_t y, Colors color, Matrix &matrix);
         static void moveChunk( Chunk *chunk, Direction::Direction const *);
         static void moveSnake( Snake *snake);
         static void moveLeft(Snake *snake);
@@ -40,6 +42,8 @@ class Logic{
     private:
         static void addLiveToSnake(Snake *snake);
         static void setDirectionSnake(Snake *snake);
+        static uint8_t getPrepareValueForField(uint8_t value);
+        static void drawBoardLines();
 };
 
 

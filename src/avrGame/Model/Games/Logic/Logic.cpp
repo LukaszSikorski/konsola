@@ -177,3 +177,58 @@ void Logic::setDirectionSnake(Snake *snake){
         snake->direction = snake->lastDirection;
     }
 }
+
+
+void Logic::drawTicTacToe(TicTacToe *ticTacToe, Matrix &matrix){
+    for (uint8_t i = 0; i < TICTACTOE_WIDTH; i++){
+        for(uint8_t j = 0; j < TICTACTOE_HEIGHT; j++){
+            uint8_t owner = ticTacToe->board[i][j];
+            if(owner == Select::player1){
+                Logic::drawField(i, j, Colors::red, matrix);
+            }
+            else if(owner == Select::player2){
+                Logic::drawField(i, j, Colors::green, matrix);
+            }
+        }
+    }
+    Logic::drawBoardLines();
+}
+
+void Logic::drawField(uint8_t x, uint8_t y, Colors color ,Matrix &matrix){
+    x = Logic::getPrepareValueForField(x);
+    y = Logic::getPrepareValueForField(y);
+    Rect rect = avrGame::rect(x, y, 2, 2);
+    avrGame::draw.rect(matrix, rect, color);
+
+    
+}
+
+uint8_t Logic::getPrepareValueForField(uint8_t value){
+    uint8_t result = 0;
+    switch(value){
+        case 0:
+            result = 1;
+            break;
+        case 1:
+            result = 4;
+            break;
+        case 2:
+            result = 7;
+            break;
+        default:
+            result = 0;
+        break;
+    }
+    return result;
+}
+
+void Logic::drawBoardLines(){
+    uint8_t tab[2] = {3, 6};
+    Rect rect = avrGame::rect(0, 0, 1, 1);
+    for (uint8_t i = 0; i < 2; i++){
+        rect = avrGame::rect(tab[i], 1, 1, 8);
+        avrGame::draw.rect(avrGame::_matrix, rect, Colors::yellow);
+        rect = avrGame::rect(1, tab[i], 8, 1);
+        avrGame::draw.rect(avrGame::_matrix, rect, Colors::yellow);
+    }
+}
