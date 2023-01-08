@@ -20,11 +20,11 @@ Złącze zasilania oraz programowania jest zaznaczone kolorem białym.
 Są podzielone na dwie sekcje wyboru oraz poruszania
 ### Wybór
 
-Klawisze wyboru są zaznaczone kolorem niebieskim. Górny odpowiada za opcje "potwierdź", dolby za "cofnij"
+Klawisze wyboru są zaznaczone kolorem niebieskim. Górny odpowiada za opcje "potwierdź", dolny za "cofnij"
 
 ### Poruszanie się
 
-Klawisze zaznaczone w kolorze zielonym opowiadają za np. poruszanie się po menu, wybór poziomu trodności czy ruch obiektów w grze.
+Klawisze zaznaczone w kolorze zielonym opowiadają za np. poruszanie się po menu, wybór poziomu trudności czy ruch obiektów w grze.
 
 Zaimplementowana została gra "Snake"
 
